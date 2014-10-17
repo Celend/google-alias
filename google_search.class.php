@@ -1,22 +1,23 @@
 <?php
 /**
- * parsing the google search response data
- * @package parsing
+ * class for parsing google search results
+ * @license GNU LGPL Ver 3.0
+ * @package google-alias
  * @author celend
+ * @date 14-10-15
  */
 if(!defined('QUOTE'))
     exit('Access Denied!');
 class Google_search {
 
-    public $paras = array();      //parameters
-    public $headers = "";
-    public $content = "";          //html content
-    public $start = 0;             //results offset
-    public $num = 10;
-
-    public $key_word = '';
-    public $url = 'https://www.google.com/search?';
-    public $ress = array();         //original results
+    private $paras = array();      //parameters
+    private $headers = "";
+    private $content = "";          //html content
+    private $start = 0;             //results offset
+    private $num = 10;
+    private $key_word = '';
+    private $url = 'https://www.google.com/search?';
+    private $ress = array();         //original results
     public $res_num = '';            //results total
     public $time = '';               //search time
     public $results = array();      //assorted results
@@ -81,12 +82,16 @@ class Google_search {
         $this->content = preg_replace('`<script[^>]*>.*?</script>`', '', $this->content);
         $this->content = preg_replace('`<style[^>]*>.*?</style>`', '', $this->content);
     }
+
+    /**
+     * @return array
+     */
     function get_results(){
-        $s = $this->content;
-        preg_match('`<p[^>]+?class="_e4b"[^>]*><a[\s\S]+?href="/search\?[^"]*?ei=([^&]+)[^"]*">`s', $s, $th);
+        preg_match('`href="/search\?q[^"]*?ei=([^"]*?)&[^"]*?"`s', $this->content, $th);
+        $this->paras['ei'] = $th[1];
         $regex = '`<li[^>]+class="[^"]+"[^>]*>.*?<div[^>]class="rc"[^>]*><h3 class="r"><a[^>]+?href="([^"]+)"[^>]*>(.+?)</a>.*?'.
         '</h3>.+?<span[^>]+class="st">(<span[^>]+class="[^"]*?"[^>]*>.*?</span>.*?|.*?)</span>.*?</li>`s';
-        preg_match_all($regex, $s, $this->ress, PREG_SET_ORDER);
+        preg_match_all($regex, $this->content, $this->ress, PREG_SET_ORDER);
         foreach($this->ress as $k => $v){
             $this->results[] = array(
                 'url'   => $v[1],

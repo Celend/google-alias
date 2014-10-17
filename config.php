@@ -1,6 +1,14 @@
 <?php
+/**
+ * configuration file
+ * @license GNU LGPL Ver 3.0
+ * @package google-alias
+ * @author celend
+ * @date 14-10-15
+ */
 if(!defined('QUOTE'))
     exit('Access Denied!');
+
 if(function_exists('zlib_decode'))
     define("HAVE_GZIP", TRUE);
 else

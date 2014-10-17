@@ -1,14 +1,17 @@
 <?php
 /**
- * Created by celend
- * Date: 14-10-15
- * Time: 下午8:51
+ * the index document
+ * @license GNU LGPL Ver 3.0
+ * @package google-alias
+ * @author celend
+ * @date 14-10-15
  */
 define("QUOTE", TRUE);
+
 require_once 'google_search.class.php';
 require_once 'config.php';
 $c = file_get_contents('test3.html');
-preg_match('`<p[^>]+?class="_e4b"[^>]*><a[\s\S]+?href="/search\?[^"]*?ei=([^&]+)[^"]*">`s', $c, $e);
+preg_match('`href="/search\?q[^"]*?ei=([^"]*?)&[^"]*?"`s', $c, $e);
 var_dump($e);
 /*$q = $_GET['qqq'];
 $p = isset($_GET['ppp']) ? $_GET['ppp'] : 0;
