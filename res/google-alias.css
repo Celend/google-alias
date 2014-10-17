@@ -1,60 +1,75 @@
+html {
+    height: 100%;
+    overflow: hidden;
+}
 
-body{
+body {
+    margin: 0;
+    height: 100%;
     font-family: arial,sans-serif;
+    overflow: auto;
 }
-.i-search{
-    position: relative;
-    margin: 155px auto 0 auto;
-    width: 528px;
-    padding: 10px;
-}
-.a-logo{
 
+.i-search {
+    margin: 0 auto;
+    margin-top: 10%;
 }
-.i-logo-img{
+
+.i-logo {
+    width: 300px;
+    margin: 0 auto;
+}
+
+.i-logo-img {
     background: url(./logo11w.png) no-repeat;
     background-size: 300px 105px;
     position: relative;
-    margin: 0 auto 0 auto;
+    margin: 0 auto;
     width: 300px;
     height: 105px;
 }
-.alias{
+
+.alias {
     position: relative;
     color: #777;
     font-size: 20px;
-    left: 362px;
-    top: -26px;
-    display: block;
+    left: 256px;
+    top: -25px;
     font-weight: bold;
 }
-.i-search-bra{
+
+.i-search-bra {
     margin-top: 15px;
-    height: 26px;
-    width: 120%;
+    text-align: center;
 }
-.i-q{
-    float: left;
-    width: 500px;
-    height: 26px;
-    padding: 0 5px 0 5px;
+
+.i-q {
+    width: 40%;
+    height: 29px;
+    padding: 4px 6px 0;
     border: 1px solid #b9b9b9;
     font: -webkit-small-control;
-    text-align: start;
-    line-height: 1.15em;
+    box-sizing: border-box;
+    font-size: 17px;
+    min-width: 250px;
 }
-.i-q:hover{
+
+.i-q:hover {
     border-color: #a3a3a3;
 }
-.i-q:focus{
+
+.i-q:focus {
     border-color: #5f8be8;
 }
-.i-search-bu{
-    margin: 0 0 0 10px;
+
+.i-search-bu {
+    background: url("./search.png") no-repeat center center;
+    margin-left: 10px;
     border: none;
     border-radius: 2px;
     background-color: #4d90fe;
     height: 27px;
     width: 68px;
-    float: left;
+    display: inline-block;
+    vertical-align: top;
 }
