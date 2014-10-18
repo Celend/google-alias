@@ -120,7 +120,6 @@ body {
 }
 
 .s-q:focus {
-<<<<<<< HEAD
 	border-color: #5f8be8;
 }
 
@@ -192,7 +191,72 @@ a:visited {
 .f {
 	color: #808080;
 }
-
+/*pages bar*/
+.navcnt{
+    width: 100%;
+    height: 55px;
+}
+.nav-t{
+    margin: 25px auto 0 auto;
+}
+.nav-a{
+    display: block;
+    color: #1a0dab;
+    font-size: .8em;
+}
+.s-prev{
+    width: 74px;
+    height: 55px;
+}
+.t-prev{
+    float: left;
+}
+.t-prev:hover, .t-next:hover{
+    text-decoration: underline;
+}
+.t-next{
+    text-decoration: none;
+    float: right;
+}
+.s-next{
+    width: 88px;
+    height: 55px
+}
+.nav-n{
+    margin-left: -4px;
+    text-align: center;
+    display: block;
+    width: 20px;
+}
+.nav-n:hover{
+    text-decoration: underline;
+}
+.csb{
+    background: url("./nav_logo195.png") no-repeat left;
+    height: 40px;
+    display: block;
+    margin-left: -4px;
+    text-align: center;
+}
+.c-g{
+    background-position: 0 0;
+    width: 52px;
+    margin-left: 0;
+    float: right;
+}
+.c-o1{
+    background-position: -52px 0;
+    width: 22px;
+}
+.c-o2{
+    background-position: -74px 0;
+    width: 22px;
+}
+.c-gle{
+    background-position: -96px 0;
+    width: 70px;
+    display: block;
+}
 @media screen and (max-width: 780px){
 	.s-logo {
 		display: block;

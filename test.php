@@ -13,7 +13,17 @@ $ch = curl_init('https://www.google.com/search?hl=zh-CN&num=10&tbs=qdr%3Ay&q='.$
 
 global $headers;
 curl_setopt_array($ch, $headers);
-echo curl_exec($ch);
+$c = curl_exec($ch);
+$hsize = curl_getinfo($ch, CURLINFO_HEADER_SIZE );
+$h =  substr($c, 0, $hsize);
+preg_match_all('`Set-Cookie:(.*)`', $h, $g);
+for($i = 0; $i < count($g[1]); $i++){
+    curl_setopt($ch, CURLOPT_COOKIE, $g[1][0]);
+}
+$c = curl_exec($ch);
+$hsize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+$h =  substr($c, 0, $hsize);
+echo $h;
 /*if(!isset($_GET['qqq'])){
     require_once 'view.class.php';
     $index = new view();

@@ -18,10 +18,12 @@ $GLOBALS['OPTIONS'] = array(
     'SAFE_SEARCH' => FALSE,
     'ENABLE_GZIP' => TRUE,
     'TIMEOUT'     => 3,
+    'NUM'         => 10,
     'GET_Q'       => 'qqq',
     'GET_PAGE'    => 'ppp',
     'GET_NUM'     => 'num',
-    'GET_TIME'    => 'ddd'
+    'GET_TIME'    => 'ddd',
+    'DOMAIN'      => 'http://googlealias.tk/'
 );
 $headers = array(
     CURLOPT_HTTPHEADER => array(
@@ -30,6 +32,7 @@ $headers = array(
     ),
     CURLOPT_RETURNTRANSFER => TRUE,
     CURLOPT_BINARYTRANSFER => TRUE,
+    CURLOPT_HEADER         => TRUE,
     CURLOPT_CONNECTTIMEOUT => $GLOBALS['OPTIONS']['TIMEOUT']        //set connect timeout
 );
 if(HAVE_GZIP && $GLOBALS['OPTIONS']['ENABLE_GZIP'])
