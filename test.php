@@ -8,9 +8,13 @@
  */
 define("QUOTE", TRUE);
 error_reporting(E_ALL);
-session_start();
 require_once 'config.php';
-if(!isset($_GET['qqq'])){
+$ch = curl_init('https://www.google.com/search?hl=zh-CN&num=10&tbs=qdr%3Ay&q='.$_GET['qqq']);
+
+global $headers;
+curl_setopt_array($ch, $headers);
+echo curl_exec($ch);
+/*if(!isset($_GET['qqq'])){
     require_once 'view.class.php';
     $index = new view();
     $index->show();
@@ -19,9 +23,9 @@ else{
     require_once 'google_search.class.php';
     require_once 'view.class.php';
     $q = $_GET['qqq'];
-    $p = isset($_GET[$GLOBALS['OPTIONS']['GET_PAGE']]) ? $_GET[$GLOBALS['OPTIONS']['GET_PAGE']] : 0;
-    $d = isset($_GET[$GLOBALS['OPTIONS']['GET_TIME']]) ? $_GET[$GLOBALS['OPTIONS']['GET_TIME']] : 'y';
-    $n = isset($_GET[$GLOBALS['OPTIONS']['GET_NUM']])? (int) $_GET[$GLOBALS['OPTIONS']['GET_NUM']] : FALSE;
+    $p = isset($_GET['ppp']) ? $_GET['ppp'] : 0;
+    $d = isset($_GET['ddd']) ? $_GET['ddd'] : 'y';
+    $n = isset($_GET['num'])? (int) $_GET['num'] : FALSE;
     $g = new Google_search($q);
     if($n)
         $g->set_num($n);
@@ -30,7 +34,6 @@ else{
     if($d)
         $g->set_time_limit($d);
     $g->load();
-    $g->get_results();
-    $v = new view($g, $g->key_word.' - Google Alias Search', 'search');
-    $v->show();
-}
+    var_dump($g->get_results());
+    echo $g->get_full_url();
+}*/

@@ -6,6 +6,9 @@
  * @author celend
  * @date 14-10-15
  */
+if(!defined('QUOTE')){
+    exit('Access Denied!');
+}
 
 class view {
 
@@ -33,7 +36,7 @@ EOT;
   <div class="i-keywork">
     <div class="i-search-bar">
       <form action="./" method="get" onsubmit="return document.getElementsByClassName('i-q')[0].value==''?false:true">
-        <input type="text" placeholder="23" name="qqq" class="i-q">
+        <input type="text" name="<{GET_Q}>" class="i-q">
         <button type="submit" class="i-search-bu">
         </button>
       </form>
@@ -59,7 +62,7 @@ EOT;
     </div>
     <div class="s-search-bar">
       <form action="./" method="get" onsubmit="return true">
-        <input type="text" value="<{key}>" name="qqq" class="s-q"/>
+        <input type="text" value="<{key}>" name="<{GET_Q}>" class="s-q"/>
         <button type="submit" class="i-search-bu">
       </form>
     </div>
@@ -87,11 +90,13 @@ EOT;
         $tle = 'Google Alias Search';
         if(@get_class($Google_search) == 'Google_search'){
             $this->data = $Google_search;
+            $this->is_start = str_replace('<{GET_Q}>', $GLOBALS['OPTIONS']['GET_Q'], $this->s_start);
             $this->head = str_replace('<{title}>', $this->data->key_word.' - '.$tle, $this->head);
             $this->type = 1;
         }
         else{
             $this->type = 0;
+            $this->index_body = str_replace('<{GET_Q}>', $GLOBALS['OPTIONS']['GET_Q'], $this->index_body);
             $this->head = str_replace('<{title}>', $tle, $this->head);
         }
         return $this;
