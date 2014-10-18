@@ -8,6 +8,7 @@
  */
 define("QUOTE", TRUE);
 error_reporting(E_ALL);
+session_start();
 require_once 'config.php';
 if(!isset($_GET['qqq'])){
     require_once 'view.class.php';
@@ -18,9 +19,9 @@ else{
     require_once 'google_search.class.php';
     require_once 'view.class.php';
     $q = $_GET['qqq'];
-    $p = isset($_GET['ppp']) ? $_GET['ppp'] : 0;
-    $d = isset($_GET['ddd']) ? $_GET['ddd'] : 'y';
-    $n = isset($_GET['num'])? (int) $_GET['num'] : FALSE;
+    $p = isset($_GET[$GLOBALS['OPTIONS']['GET_PAGE']]) ? $_GET[$GLOBALS['OPTIONS']['GET_PAGE']] : 0;
+    $d = isset($_GET[$GLOBALS['OPTIONS']['GET_TIME']]) ? $_GET[$GLOBALS['OPTIONS']['GET_TIME']] : 'y';
+    $n = isset($_GET[$GLOBALS['OPTIONS']['GET_NUM']])? (int) $_GET[$GLOBALS['OPTIONS']['GET_NUM']] : FALSE;
     $g = new Google_search($q);
     if($n)
         $g->set_num($n);

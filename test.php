@@ -9,7 +9,12 @@
 define("QUOTE", TRUE);
 error_reporting(E_ALL);
 require_once 'config.php';
-if(!isset($_GET['qqq'])){
+$ch = curl_init('https://www.google.com/search?hl=zh-CN&num=10&tbs=qdr%3Ay&q='.$_GET['qqq']);
+
+global $headers;
+curl_setopt_array($ch, $headers);
+echo curl_exec($ch);
+/*if(!isset($_GET['qqq'])){
     require_once 'view.class.php';
     $index = new view();
     $index->show();
@@ -29,7 +34,6 @@ else{
     if($d)
         $g->set_time_limit($d);
     $g->load();
-    $g->get_results();
-    $v = new view($g, $g->key_word.' - Google Alias Search', 'search');
-    $v->show();
-}
+    var_dump($g->get_results());
+    echo $g->get_full_url();
+}*/

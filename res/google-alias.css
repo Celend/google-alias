@@ -132,6 +132,7 @@ body {
     width: 550px;
     margin: 0 0 0 140px;
     padding-left: 8px;
+    border-bottom: 1px #e5e5e5 solid;
 }
 .search-tool-bar{
     position: relative;
