@@ -7,23 +7,21 @@
  * @date 14-10-15
  */
 define("QUOTE", TRUE);
+error_reporting(E_ALL);
 require_once 'config.php';
 if(!isset($_GET['qqq'])){
     require_once 'view.class.php';
     $index = new view();
-    $index->show_index();
+    $index->show();
 }
 else{
     require_once 'google_search.class.php';
-    $c = file_get_contents('test3.html');
-    preg_match('`href="/search\?q[^"]*?ei=([^"]*?)&[^"]*?"`s', $c, $e);
-    var_dump($e);
+    require_once 'view.class.php';
     $q = $_GET['qqq'];
     $p = isset($_GET['ppp']) ? $_GET['ppp'] : 0;
     $d = isset($_GET['ddd']) ? $_GET['ddd'] : 'y';
     $n = isset($_GET['num'])? (int) $_GET['num'] : FALSE;
     $g = new Google_search($q);
-    echo '<pre>';
     if($n)
         $g->set_num($n);
     if($p)
@@ -31,6 +29,7 @@ else{
     if($d)
         $g->set_time_limit($d);
     $g->load();
-    echo $g->get_full_url();
-    var_dump($g->get_results());
+    $g->get_results();
+    $v = new view($g, $g->key_word.' - Google Alias Search', 'search');
+    $v->show();
 }

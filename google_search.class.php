@@ -15,12 +15,16 @@ class Google_search {
     private $content = "";          //html content
     private $start = 0;             //results offset
     private $num = 10;
-    private $key_word = '';
     private $url = 'https://www.google.com/search?';
-    private $ress = array();         //original results
+
+
+    public $key_word = '';
+    public $ress = array();         //original results
     public $res_num = '';            //results total
     public $time = '';               //search time
-    public $results = array();      //assorted results
+    public $results = array();
+    public $errno = 0;
+
     function __construct($key){
         $this->key_word = $key;
         $this->paras['hl'] = 'zh-CN';
@@ -35,14 +39,17 @@ class Google_search {
         $p = $this->arr2url($this->paras);
         $ch = curl_init($this->url.$p);
         curl_setopt_array($ch, $headers);
+        $this->content = curl_exec($ch);
+        $this->errno = curl_errno($ch);
+        if($this->errno)
+            return FALSE;
         if(HAVE_GZIP && $GLOBALS['OPTIONS']['ENABLE_GZIP'])
-            $this->content = zlib_decode(curl_exec($ch));
-        else
-            $this->content =curl_exec($ch);
+                $this->content = zlib_decode($this->content);
         $this->remove_css_and_js();
         preg_match('`<div id="resultStats"[^>]*>[^\d]*([\d,]*)[^<]*<nobr>[^\d]*([\d\.]*)[^<]*</nobr></div>`m', $this->content, $re);
         $this->res_num = $re[1];
         $this->time = $re[2];
+        return $this;
     }
 
     /**
@@ -73,6 +80,7 @@ class Google_search {
     }
     private function add_parse($key, $value){
         $this->paras[$key] = $value;
+        return $this;
     }
     private function get_current_page(){
         return floor($this->start / 10);
@@ -81,22 +89,27 @@ class Google_search {
         $this->content = str_replace("\n", '', $this->content);
         $this->content = preg_replace('`<script[^>]*>.*?</script>`', '', $this->content);
         $this->content = preg_replace('`<style[^>]*>.*?</style>`', '', $this->content);
+        return $this;
     }
 
     /**
      * @return array
      */
     function get_results(){
+        if($this->errno)
+            return FALSE;
         preg_match('`href="/search\?q[^"]*?ei=([^"]*?)&[^"]*?"`s', $this->content, $th);
         $this->paras['ei'] = $th[1];
         $regex = '`<li[^>]+class="[^"]+"[^>]*>.*?<div[^>]class="rc"[^>]*><h3 class="r"><a[^>]+?href="([^"]+)"[^>]*>(.+?)</a>.*?'.
-        '</h3>.+?<span[^>]+class="st">(<span[^>]+class="[^"]*?"[^>]*>.*?</span>.*?|.*?)</span>.*?</li>`s';
+        '</h3>.+?<cite[^>]+class="_Rm">(.*?)</cite>.*?<span[^>]+class="st">(<span[^>]+class="[^"]*?"[^>]*>.*?</span>.*?|.*?)</span>.*?</li>`s';
         preg_match_all($regex, $this->content, $this->ress, PREG_SET_ORDER);
         foreach($this->ress as $k => $v){
             $this->results[] = array(
                 'url'   => $v[1],
                 'title' => $v[2],
-                'info'  => $v[3]
+                'site'  => $v[3],
+                'info'  => $v[4]
+
             );
         }
         return $this->results;
@@ -135,18 +148,18 @@ class Google_search {
             default:
                 return False;
         }
-        return TRUE;
+        return $this;
     }
 
     /**
      * set page number
      * @param int
-     * @return bool
+     * @return this
      */
     public function set_page($num){
         $this->start = $num * $this->num;
         $this->paras['start'] = $this->start;
-        return TRUE;
+        return $this;
     }
     public function get_full_url(){
         return $this->url.$this->arr2url($this->paras);
@@ -155,9 +168,11 @@ class Google_search {
         $num = (int) $num;
         $this->num = $num;
         $this->paras['num'] = $num;
+        return $this;
     }
     public function set_keywork($key){
         $key = urlencode($key);
         $this->key_word = $key;
+        return $this;
     }
 }

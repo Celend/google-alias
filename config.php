@@ -26,7 +26,8 @@ $headers = array(
         'accept:text/html;q=0.9,*/*;q=0.8'
     ),
     CURLOPT_RETURNTRANSFER => TRUE,
-    CURLOPT_BINARYTRANSFER => TRUE
+    CURLOPT_BINARYTRANSFER => TRUE,
+    CURLOPT_CONNECTTIMEOUT => 3
 );
 if(HAVE_GZIP && $GLOBALS['OPTIONS']['ENABLE_GZIP'])
     $headers[] = 'accept-encoding:gzip,deflate';

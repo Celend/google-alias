@@ -46,7 +46,7 @@ body {
 .i-q {
     width: 40%;
     height: 29px;
-    padding: 4px 6px 0;
+    padding: 4px 6px 2px 4px;
     border: 1px solid #b9b9b9;
     font: -webkit-small-control;
     box-sizing: border-box;
@@ -88,7 +88,7 @@ body {
 .s-top-bar{
     height: 65px;
     width: 100%;
-    position: fixed;
+    position: relative;
     top: 0px;
     background: #f1f1f1;
     border-bottom: 1px #e5e5e5 solid;
@@ -127,9 +127,52 @@ body {
     width: 50%;
 }
 .search-res{
-    width: 515px;
-    min-height: 1500px;
-    background: #CCC;
+    position: relative;
+    top: 20px; 
+    width: 550px;
     margin: 0 0 0 140px;
-    padding-left: 5px;
+    padding-left: 8px;
+}
+.search-tool-bar{
+    position: relative;
+    height: 30px;
+    width: 100%;
+    border-bottom: 1px #e5e5e5 solid;
+}
+em{
+    color: #dd4b39;
+    font-style: normal;
+}
+.s-box{
+    display: block;
+    margin: 0 0 20px 0;
+}
+.s-title{
+    font-size: 1.2em;
+}
+.s-title:hover{
+    text-decoration: underline;
+}
+.s-disc{
+    line-height: 1.4;
+    word-wrap: break-word;
+    color: #545454;
+    font-size: small;
+}
+.s-title-link{
+    color: #006621;
+    font-style: normal;
+    font-size: 13px;
+    display: block;
+    margin-top: -2px;
+}
+a:link{
+    color: #1a0dab;
+    text-decoration: none;
+}
+a:visited{
+    color: #609;
+}
+.f{
+    color: #808080;
 }

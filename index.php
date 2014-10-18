@@ -12,16 +12,16 @@ require_once 'config.php';
 if(!isset($_GET['qqq'])){
     require_once 'view.class.php';
     $index = new view();
-    $index->show_index();
+    $index->show();
 }
 else{
     require_once 'google_search.class.php';
+    require_once 'view.class.php';
     $q = $_GET['qqq'];
     $p = isset($_GET['ppp']) ? $_GET['ppp'] : 0;
     $d = isset($_GET['ddd']) ? $_GET['ddd'] : 'y';
     $n = isset($_GET['num'])? (int) $_GET['num'] : FALSE;
     $g = new Google_search($q);
-    echo '<pre>';
     if($n)
         $g->set_num($n);
     if($p)
@@ -29,6 +29,7 @@ else{
     if($d)
         $g->set_time_limit($d);
     $g->load();
-    var_dump($g->get_results());
-    echo $g->get_full_url();
+    $g->get_results();
+    $v = new view($g, $g->key_word.' - Google Alias Search', 'search');
+    $v->show();
 }
