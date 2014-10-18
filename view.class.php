@@ -38,7 +38,6 @@ EOT;
       <form action="./" method="get" onsubmit="return document.getElementsByClassName('i-q')[0].value==''?false:true">
         <input type="text" name="<{GET_Q}>" class="i-q">
         <button type="submit" class="i-search-bu">
-          <img src="res/search.png" />
         </button>
       </form>
     </div>
