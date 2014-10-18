@@ -10,7 +10,7 @@ define("QUOTE", TRUE);
 error_reporting(E_ALL);
 session_start();
 require_once 'config.php';
-if(!isset($_GET['qqq'])){
+if(!isset($_GET[$GLOBALS['OPTIONS']['GET_Q']])){
     require_once 'view.class.php';
     $index = new view();
     $index->show();
@@ -18,7 +18,7 @@ if(!isset($_GET['qqq'])){
 else{
     require_once 'google_search.class.php';
     require_once 'view.class.php';
-    $q = $_GET['qqq'];
+    $q = $_GET[$GLOBALS['OPTIONS']['GET_Q']];
     $p = isset($_GET[$GLOBALS['OPTIONS']['GET_PAGE']]) ? $_GET[$GLOBALS['OPTIONS']['GET_PAGE']] : 0;
     $d = isset($_GET[$GLOBALS['OPTIONS']['GET_TIME']]) ? $_GET[$GLOBALS['OPTIONS']['GET_TIME']] : FALSE;
     $n = isset($_GET[$GLOBALS['OPTIONS']['GET_NUM']])? (int) $_GET[$GLOBALS['OPTIONS']['GET_NUM']] : FALSE;

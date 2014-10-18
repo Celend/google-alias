@@ -288,4 +288,15 @@ a:visited {
 		margin: 0 auto;
 		max-width: 580px;
 	}
+    .s-prev{
+        width: 40px;
+        height: 55px;
+    }
+    .s-next{
+        width: 50px;
+        height: 55px
+    }
+    .nav-t{
+        margin: 25px auto 0 -14px;
+    }
 }
