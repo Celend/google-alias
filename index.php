@@ -20,7 +20,7 @@ else{
     require_once 'view.class.php';
     $q = $_GET['qqq'];
     $p = isset($_GET[$GLOBALS['OPTIONS']['GET_PAGE']]) ? $_GET[$GLOBALS['OPTIONS']['GET_PAGE']] : 0;
-    $d = isset($_GET[$GLOBALS['OPTIONS']['GET_TIME']]) ? $_GET[$GLOBALS['OPTIONS']['GET_TIME']] : 'y';
+    $d = isset($_GET[$GLOBALS['OPTIONS']['GET_TIME']]) ? $_GET[$GLOBALS['OPTIONS']['GET_TIME']] : FALSE;
     $n = isset($_GET[$GLOBALS['OPTIONS']['GET_NUM']])? (int) $_GET[$GLOBALS['OPTIONS']['GET_NUM']] : FALSE;
     $g = new Google_search($q); 
     if($n)
