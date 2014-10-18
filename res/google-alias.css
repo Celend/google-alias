@@ -127,6 +127,8 @@ body {
     width: 50%;
 }
 .search-res{
+    list-style: none;
+    display: block;
     position: relative;
     top: 20px; 
     width: 550px;
