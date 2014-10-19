@@ -65,7 +65,7 @@ EOT;
   </a>
     <div class="s-search-bar">
       <form action="./" method="get" onsubmit="return true">
-        <input type="text" value="<{key}>" name="qqq" class="s-q"/>
+        <input type="text" value="<{key}>" name="<{GET_Q}>" class="s-q"/>
         <button type="submit" class="i-search-bu">
       </form>
     </div>
@@ -138,6 +138,7 @@ EOT;
             $this->data = $Google_search;
             $this->is_start = str_replace('<{GET_Q}>', $GLOBALS['OPTIONS']['GET_Q'], $this->s_start);
             $this->head = str_replace('<{title}>', $this->data->key_word.' - '.$tle, $this->head);
+            $this->s_start = str_replace('<{GET_Q}>', $GLOBALS['OPTIONS']['GET_Q'], $this->s_start);
             $this->type = 1;
         }
         else{
@@ -221,21 +222,16 @@ EOT;
             }
         }
         else{
-            $j = 0;
-            for($i = 0; $i < 10; $i++){
-                if($i < 6)
-                    $j = $cp - 5 + $i;
-                else
-                    $j = $cp + $i - 5;
-                if($j == $cp){
+            for($i = $cp - 5; $i < $cp + 5; $i++){
+                if($i == $cp){
                     echo str_replace('<{href}>', '',
-                        str_replace('<{num}>', $j, $this->page_o1)
+                        str_replace('<{num}>', $i, $this->page_o1)
                     );
                 }
                 else{
                     echo str_replace('<{href}>', 
-                      'href="'.$this->data->get_url_withpage($j).'"',
-                        str_replace('<{num}>', $j, $this->page_o2)
+                      'href="'.$this->data->get_url_withpage($i).'"',
+                        str_replace('<{num}>', $i, $this->page_o2)
                     );
                 }
             }

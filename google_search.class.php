@@ -41,7 +41,7 @@ class Google_search {
     public function load(){
         global $headers;
         $this->paras['q'] = $this->key_word;
-        $this->paras[$GLOBALS['OPTIONS']['GET_Q']] = urlencode($this->key_word);
+        $this->paras[$GLOBALS['OPTIONS']['GET_Q']] = $this->key_word;
         $p = $this->arr2url($this->paras);
         $ch = curl_init($this->url.$p);
         curl_setopt_array($ch, $headers);

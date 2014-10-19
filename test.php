@@ -8,13 +8,17 @@
  */
 define("QUOTE", TRUE);
 error_reporting(E_ALL);
+$regex = '@(<li class="g"[^>]*(id="([^"]*)")>)@s';
 require_once 'config.php';
-$ch = curl_init('https://www.google.com/search?hl=zh-CN&num=10&tbs=qdr%3Ay&q='.$_GET['qqq']);
-
-global $headers;
-curl_setopt_array($ch, $headers);
-$c = curl_exec($ch);
-$hsize = curl_getinfo($ch, CURLINFO_HEADER_SIZE );
+$t1 = explode(' ', microtime());
+$c = file_get_contents('test.html');
+$t2 = explode(' ', microtime());
+header('content-type:text/plain');
+preg_match_all($regex, $c, $h);
+unset($h[0]);
+var_dump($h);
+//var_dump($h);
+/*$hsize = curl_getinfo($ch, CURLINFO_HEADER_SIZE );
 $h =  substr($c, 0, $hsize);
 preg_match_all('`Set-Cookie:(.*)`', $h, $g);
 for($i = 0; $i < count($g[1]); $i++){
@@ -23,7 +27,7 @@ for($i = 0; $i < count($g[1]); $i++){
 $c = curl_exec($ch);
 $hsize = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
 $h =  substr($c, 0, $hsize);
-echo $h;
+*/
 /*if(!isset($_GET['qqq'])){
     require_once 'view.class.php';
     $index = new view();
