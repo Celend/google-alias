@@ -257,6 +257,15 @@ a:visited {
     width: 70px;
     display: block;
 }
+.search-info{
+    margin: 15px 0 0 145px;
+    height: 100%;
+    color: #808080;
+    font-size: .95em;
+}
+.left-tool-box{
+
+}
 @media screen and (max-width: 780px){
 	.s-logo {
 		display: block;

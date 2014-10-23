@@ -24,6 +24,7 @@ class view {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/x-icon" href="res/favicon.ico" />
   <script src="res/google-alias.js"></script>
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="res/google-alias.css" />
 </head>
 EOT;
@@ -71,7 +72,13 @@ EOT;
     </div>
   </div>
   <div class="search-tool-bar">
-  
+EOT;
+  private $toobar_s = <<<EOT
+  <div class="search-info">
+      找到约 <{num}> 条结果, 用时 <{second}> 秒.
+  </div>
+EOT;
+  private $toobar_e = <<<EOT
   </div>
   <div class="search-res">
     <div style="border-bottom: 1px #e5e5e5 solid;">
@@ -172,6 +179,7 @@ EOT;
             }
             echo $this->head;
             echo str_replace('<{key}>', $this->data->key_word,$this->s_start);
+            $this->show_tool_bar();
             foreach($this->data->results as $v){
                 if($v['id'] != "")
                     continue;
@@ -190,7 +198,13 @@ EOT;
             echo $this->head.$this->index_body;
         }
     }
-    function show_page(){
+    private function show_tool_bar(){
+        echo str_replace('<{second}>', $this->data->time,
+            str_replace('<{num}>', $this->data->res_num,$this->toobar_s)
+        );
+        echo $this->toobar_e;
+    }
+    private function show_page(){
         if(!$this->type)
             return FALSE;
         $cp = $this->data->get_page();
