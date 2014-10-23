@@ -126,12 +126,9 @@ EOT;
     public $data = '';
 
     /**
-    * construct function
-    * @param $Google_search accept a Google_search class, this class must be called get_results() method.
-    * @param $tle set the html title
-    * @param $type set the type to be display, index or search
-    * @return bool
-    */
+     * @param google_search class $Google_search
+     * @return this
+     */
     function __construct($Google_search = ''){
         $tle = 'Google Alias Search';
         if(@get_class($Google_search) == 'Google_search'){
@@ -176,6 +173,8 @@ EOT;
             echo $this->head;
             echo str_replace('<{key}>', $this->data->key_word,$this->s_start);
             foreach($this->data->results as $v){
+                if($v['id'] != "")
+                    continue;
                 echo str_replace('<{disc}>', $v['info'],
                     str_replace('<{site}>', $v['site'],
                         str_replace('<{tle}>', $v['title'],

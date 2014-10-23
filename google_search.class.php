@@ -28,10 +28,6 @@ class Google_search {
     function __construct($key){
         $this->key_word = $key;
         $this->paras2[$GLOBALS['OPTIONS']['GET_Q']] = $key;
-        if(!isset($this->paras['ei']) && isset($_GET['ei'])){
-            $this->paras['ei'] = $_GET['ei'];
-            $this->paras2['ei'] = $_GET['ei'];
-        }
         $this->paras['hl'] = 'zh-CN';
         $this->paras['num'] = $this->num = $GLOBALS['OPTIONS']['NUM'];
         if($GLOBALS['OPTIONS']['SAFE_SEARCH'])
@@ -69,10 +65,6 @@ class Google_search {
         parse_str($str, $f);
         return $f;
     }
-    public function set_ei($ei){
-        $this->paras['ei'] = $ei;
-        return $this;
-    }
     /**
      * array convert into url
      * @param $paras_arr
@@ -107,9 +99,6 @@ class Google_search {
     function get_results(){
         if($this->errno)
             return FALSE;
-        preg_match('`href="/search\?q[^"]*?ei=([^"]*?)&[^"]*?"`s', $this->content, $th);
-        $this->paras['ei'] = $th[1];
-        $this->paras2['ei'] = $th[1];
         $c = 0;
         $s = array();
         while(TRUE){
@@ -137,7 +126,10 @@ class Google_search {
             $disc_reg = '@<span[^>]+class="st"[^>]*>((?:<span[^>]+class="f">.*?</span>)?.*?)</span>@s';
             preg_match($disc_reg, $s[$i], $r);
             $disc = isset($r[1]) ? $r[1] : '';
-            $this->results[] = array('id' => $id, 'href' => $href, 'tle' => $tle, 'disc' => $disc);
+            $site_reg = '@<cite[^>]+class="_Rm[^"]*"[^>]*>(.*?)</cite>@s';
+            preg_match($site_reg, $s[$i], $r);
+            $site = isset($r[1]) ? $r[1] : '';
+            $this->results[] = array('id' => $id, 'url' => $href, 'title' => $tle, 'info' => $disc, 'site' => $site);
         }
         return $this->results;
     }
