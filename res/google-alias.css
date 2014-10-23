@@ -350,4 +350,9 @@ a:visited {
     .nav-t{
         margin: 25px auto 0 -14px;
     }
+    .tool-box{
+        margin-left: 15px;
+        font-size: .85em;
+        width: 250px;
+    }
 }
