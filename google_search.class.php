@@ -110,17 +110,34 @@ class Google_search {
         preg_match('`href="/search\?q[^"]*?ei=([^"]*?)&[^"]*?"`s', $this->content, $th);
         $this->paras['ei'] = $th[1];
         $this->paras2['ei'] = $th[1];
-        $regex = '`<li[^>]+class="[^"]+"[^>]*>.*?<div[^>]class="rc"[^>]*><h3 class="r"><a[^>]+?href="([^"]+)"[^>]*>(.+?)</a>.*?'.
-        '</h3>.+?<cite[^>]+class="_Rm">(.*?)</cite>.*?<span[^>]+class="st">(<span[^>]+class="[^"]*?"[^>]*>.*?</span>.*?|.*?)</span>.*?</li>`s';
-        preg_match_all($regex, $this->content, $this->ress, PREG_SET_ORDER);
-        foreach($this->ress as $k => $v){
-            $this->results[] = array(
-                'url'   => $v[1],
-                'title' => $v[2],
-                'site'  => $v[3],
-                'info'  => $v[4]
-
-            );
+        $c = 0;
+        $s = array();
+        while(TRUE){
+            $s1 = stripos($this->content, '<li class="g"', $c);
+            $s2 = stripos($this->content, '<li class="g"', $s1 + 15);
+            if(!$s2){
+                $e = substr($this->content, $s1);
+                $s3 = strripos($e, '</li>') + 5;
+                $s[] = substr($this->content, $s1, $s3);
+                break;
+            }
+            $e  = substr($this->content, $s1, $s2);
+            $s3 = strripos($e, '</li>') + 5;
+            $s[] = substr($this->content, $s1, $s3);
+            $c = $s2;
+        }
+        for($i = 0; $i < count($s); $i++){
+            $id_reg = '@<li[^>]+class="g"[^>]?(?:id="([^"]*)")?[^>]*>@s';
+            preg_match($id_reg, $s[$i], $r);
+            $id = isset($r[1]) ? $r[1] : '';
+            $href_reg = '@<h3[^>]+class="r"><a href="([^"]*)"[^>]*>(.*?)</a>@s';
+            preg_match($href_reg, $s[$i], $r);
+            $href = isset($r[1]) ? $r[1] : '';
+            $tle  = isset($r[2]) ? $r[2] : '';
+            $disc_reg = '@<span[^>]+class="st"[^>]*>((?:<span[^>]+class="f">.*?</span>)?.*?)</span>@s';
+            preg_match($disc_reg, $s[$i], $r);
+            $disc = isset($r[1]) ? $r[1] : '';
+            $this->results[] = array('id' => $id, 'href' => $href, 'tle' => $tle, 'disc' => $disc);
         }
         return $this->results;
     }
