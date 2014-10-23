@@ -23,9 +23,9 @@ class view {
   <meta name="keywords" content="Google Alias">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="shortcut icon" type="image/x-icon" href="res/favicon.ico" />
-  <script src="res/google-alias.js"></script>
-  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
   <link rel="stylesheet" type="text/css" href="res/google-alias.css" />
+  <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="res/google-alias.js"></script>
 </head>
 EOT;
     private $index_body = <<<EOT
@@ -50,9 +50,9 @@ EOT;
 EOT;
     private $res_tmp = <<<EOT
     <li class="s-box">
-    <a class="s-title" href="<{href}>"  target="_blank"><{tle}></a>
-    <span class="s-title-link"><{site}></span>
-    <span class="s-disc"><{disc}></span>
+     <a class="s-title" href="<{href}>"  target="_blank"><{tle}></a>
+     <span class="s-title-link"><{site}></span>
+     <span class="s-disc"><{disc}></span>
     </li>
 EOT;
     private $s_start = <<<EOT
@@ -73,12 +73,20 @@ EOT;
   </div>
   <div class="search-tool-bar">
 EOT;
-  private $toobar_s = <<<EOT
-  <div class="search-info">
+    private $toobar_s = <<<EOT
+  <div class="tool-box">
+    <div class="search-info" id="search-info">
       找到约 <{num}> 条结果, 用时 <{second}> 秒.
+    </div>
+    <div id="tool-panel" style="display: none">
+      测试中
+    </div>
+  </div>
+  <div class="tool-btn-b tool-btn" id="tool-btn">
+    搜索工具
   </div>
 EOT;
-  private $toobar_e = <<<EOT
+    private $toobar_e = <<<EOT
   </div>
   <div class="search-res">
     <div style="border-bottom: 1px #e5e5e5 solid;">
@@ -129,6 +137,7 @@ EOT;
         </tbody>
       </table>
     </div>
+
 EOT;
     public $data = '';
 

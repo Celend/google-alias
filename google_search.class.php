@@ -77,6 +77,7 @@ class Google_search {
         foreach($paras_arr as $k => $v){
             $s .= urlencode($k).'='.urlencode($v).'&';
         }
+        $s = substr($s, 0, count($s) - 2);
         return $s;
     }
     private function add_parse($key, $value){
