@@ -25,4 +25,4 @@ config.php 里面有许多个性化的设置, 比如自定义 GET 的键名, 默
 2. http://tjt.hol.es  //同上, 不同域名而已, .tk解析不了的话就用这个
 3. http://tjt.pagebit.net
 4. http://tj.pagebit.net
-5. http://tjt.bug3.com
+5. http://tjt.bugs3.com
