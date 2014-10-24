@@ -226,11 +226,12 @@ class Google_search {
         $this->paras2[$GLOBALS['OPTIONS']['GET_PAGE']] = $num;
         return $this->get_full_url();
     }
-    public function get_url_withparas($paras){
-        foreach($paras as $k => $v){
-            $this->paras2[$k] = $v;
-        }
-        return $this->get_full_url();
+    public function get_url_withparas($k, $v){
+        $tmp = $this->paras2;
+        $this->paras2[$k] = $v;
+        $url = $this->get_full_url();
+        $this->paras2 = $tmp;
+        return $url;
     }
     public function set_num($num){
         $num = (int) $num;

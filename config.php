@@ -19,10 +19,10 @@ $GLOBALS['OPTIONS'] = array(
     'ENABLE_GZIP' => TRUE,
     'TIMEOUT'     => 3,
     'NUM'         => 10,
-    'GET_Q'       => 'qqq',
-    'GET_PAGE'    => 'ppp',
+    'GET_Q'       => 'qq',
+    'GET_PAGE'    => 'pp',
     'GET_NUM'     => 'num',
-    'GET_TIME'    => 'ddd',
+    'GET_TIME'    => 'dd',
     'DOMAIN'      => 'http://googlealias.tk/'
 );
 $headers = array(

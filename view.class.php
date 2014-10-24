@@ -79,7 +79,20 @@ EOT;
       找到约 <{num}> 条结果, 用时 <{second}> 秒.
     </div>
     <div id="tool-panel" style="display: none">
-      测试中
+      <ui>
+        <li class="no-sel tool tool-time" id="time">时间限制<span class="dwn-tri">&#9660;</span></li>
+        <div class="tool-al" id="tool-time" style="display: none;left:15px;">
+          <ui style="list-style: none;">
+            <{fill1}>
+          </ui>
+        </div>
+        <li class="no-sel tool" id="num">每页结果数<span class="dwn-tri">&#9660;</span></li>
+        <div class="tool-al" id="tool-num" style="display: none;left: 150px;">
+          <ui style="list-style: none;">
+            <{fill2}>
+          </ui>
+        </div>
+      </ui>
     </div>
   </div>
   <div class="tool-btn-b tool-btn" id="tool-btn">
@@ -208,8 +221,31 @@ EOT;
         }
     }
     private function show_tool_bar(){
+        $t1 = array('s' => '刚刚',
+            'n' => '几分钟前',
+            't' => '半小时前',
+            'h' => '一小时前',
+            'j' => '12小时前',
+            'd' => '24小时前',
+            'w' => '一星期前',
+            'm' => '一个月前',
+            'y' => '一年前'
+        );
+        $t2 = array('10', '20', '30', '50', '100');
+        $fill1 = '';
+        $fill2 = '';
+        foreach($t1 as $k => $v){
+            $fill1 .= '<a class="t-l" href="'.$this->data->get_url_withparas($GLOBALS['OPTIONS']['GET_TIME'], $k).'"><li class="opt">'.$v.'</li></a>';
+        }
+        foreach($t2 as $v){
+            $fill2 .= '<a class="t-l" href="'.$this->data->get_url_withparas($GLOBALS['OPTIONS']['GET_NUM'], $v).'"><li class="opt">'.$v.'</li></a>';
+        }
         echo str_replace('<{second}>', $this->data->time,
-            str_replace('<{num}>', $this->data->res_num,$this->toobar_s)
+              str_replace('<{num}>', $this->data->res_num,
+                  str_replace('<{fill1}>', $fill1,
+                      str_replace('<{fill2}>', $fill2,$this->toobar_s)
+                  )
+             )
         );
         echo $this->toobar_e;
     }
