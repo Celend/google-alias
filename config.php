@@ -15,21 +15,22 @@ else
     define("HAVE_GZIP", FALSE);
 
 $GLOBALS['OPTIONS'] = array(
-    'SAFE_SEARCH' => FALSE,
-    'ENABLE_GZIP' => TRUE,
-    'TIMEOUT'     => 3,
-    'NUM'         => 10,
-    'GET_Q'       => 'qq',
-    'GET_PAGE'    => 'pp',
-    'GET_NUM'     => 'num',
-    'GET_TIME'    => 'dd',
-    'DOMAIN'      => 'http://googlealias.tk/'
+    'SAFE_SEARCH' => FALSE,     //安全搜索
+    'ENABLE_GZIP' => TRUE,      //gzip 压缩, 启用之后可节省近3分之一的流量, 前提是有gzip的模块, 否则开启也是无效的.
+    'TIMEOUT'     => 3,         //连接超时
+    'NUM'         => 10,        //默认的每页结果数
+    'GET_Q'       => 'qq',      //查询内容的get键名
+    'GET_PAGE'    => 'pp',      //页数的get键名
+    'GET_NUM'     => 'num',     //每页结果数的get键名
+    'GET_TIME'    => 'dd',      //时间限制的get键名
+    'DOMAIN'      => 'http://googlealias.tk/'   //网站的域名
 );
 $headers = array(
-    CURLOPT_HTTPHEADER => array(
+    CURLOPT_HTTPHEADER => array(    //http headers, 可以根据需求来修改
         'user-agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36',
         'referer:https://www.google.com/'
-    ),
+    ),  
+//以下内容如无必要请不要修改
     CURLOPT_RETURNTRANSFER => TRUE,
     CURLOPT_BINARYTRANSFER => TRUE,
     CURLOPT_HEADER         => TRUE,
