@@ -50,6 +50,15 @@ class search{
         if(HAVE_GZIP && opt('GZIP_ENABLE'))
             $this->content = zlib_decode($this->content);
         $this->remove_css_and_js();
+        preg_match('`<div id="resultStats"[^>]*>[^\d]*([\d,]*)[^<]*<nobr>[^\d]*([\d\.]*)[^<]*</nobr></div>`m', $this->content, $r);
+        if(!isset($r[1]) || !isset($r[2])){
+            $this->status['errno'] = 404;
+            return FALSE;
+        }
+        else{
+            $this->status['res_num'] = $r[1];
+            $this->status['time'] = $r[2];
+        }
         return $this;
     }
 
