@@ -16,9 +16,11 @@ else
 
 $GLOBALS['OPTIONS'] = array(
     'SAFE_SEARCH' => FALSE,     //安全搜索
+    'LANG'        => 'zh-CN',
     'ENABLE_GZIP' => TRUE,      //gzip 压缩, 启用之后可节省近3分之一的流量, 前提是有gzip的模块, 否则开启也是无效的.
     'TIMEOUT'     => 3,         //连接超时
     'NUM'         => 10,        //默认的每页结果数
+    'GET_LANG'    => 'hl',
     'GET_Q'       => 'qq',      //查询内容的get键名
     'GET_PAGE'    => 'pp',      //页数的get键名
     'GET_NUM'     => 'num',     //每页结果数的get键名
