@@ -7,6 +7,7 @@
  */
 $( document ).ready(function(){
     $('#tool-btn').on('click', function(e){
+        $('.tool-al').hide();
         if($('#search-info').is(':visible')){
             $('#search-info').stop().animate({
                 'top': '-30px'
@@ -35,18 +36,24 @@ $( document ).ready(function(){
     });
     $('.tool').on('click', function(e){
         var type = $(this).attr('id');
-
+        $('.tool-al').not('#tool-'+type).hide();
         if(type == 'num'){
-            $('#tool-time').hide();
-            var num = $('#tool-'+type).show();
+            var num = $('#tool-'+type);
+            if(num.is(':visible'))
+                num.hide();
+            else
+                num.show();
             $('body').one('click', function(e){
                 num.hide();
             })
             return false;
         }
         else if(type == 'time'){
-            $('#tool-num').hide();
-            var time = $('#tool-'+type).show()
+            var time = $('#tool-'+type);
+            if(time.is(':visible'))
+                time.hide();
+            else
+                time.show();
             $('body').one('click', function(e){
                 time.hide();
             })
