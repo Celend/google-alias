@@ -9,9 +9,6 @@
 if(!defined('QUOTE')){
     exit('Access Denied!');
 }
-function opt($key){
-    return $GLOBALS['OPTIONS'][$key];
-}
 class view {
 
     private $type = 0;
@@ -179,12 +176,12 @@ EOT;
         if($this->type){
             if($this->g == '')
                 return FALSE;
-            if($this->g->errno){
+            if($this->g->status['errno']){
                 echo "ERROR";
                 return FALSE;
             }
             echo $this->head;
-            echo str_replace('<{key}>', $this->g->key_word,$this->s_start);
+            echo str_replace('<{key}>', $this->g->get_key(),$this->s_start);
             $this->show_tool_bar();
             foreach($this->g->results as $v){
                 if($v['id'] != "")
@@ -224,8 +221,8 @@ EOT;
         foreach($t2 as $v){
             $fill2 .= '<a class="t-l" href="'.$this->g->get_url(array(opt('GET_TIME') => $v)).'"><li class="opt">'.$v.'</li></a>';
         }
-        echo str_replace('<{second}>', $this->g->status['time'],
-            str_replace('<{num}>', $this->g->status['res_num'],
+        echo str_replace('<{second}>', @$this->g->status['time'],
+            str_replace('<{num}>', @$this->g->status['res_num'],
                 str_replace('<{fill1}>', $fill1,
                     str_replace('<{fill2}>', $fill2,$this->toobar_s)
                 )

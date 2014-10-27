@@ -143,47 +143,47 @@ class search{
             //just now
             case 's':
                 $this->paras['tbs'] .= 'qdr:s';
-                $this->paras2[$GLOBALS['OPTIONS']['GET_TIME']] = $str;
+                $this->paras_m[opt('GET_TIME')] = $str;
                 break;
             //few minutes ago
             case 'n':
                 $this->paras['tbs'] .= 'qdr:n';
-                $this->paras2[$GLOBALS['OPTIONS']['GET_TIME']] = $str;
+                $this->paras_m[opt('GET_TIME')] = $str;
                 break;
             //half of hour ago
             case 't':
                 $this->paras['tbs'] .= 'qdr:n30';
-                $this->paras2[$GLOBALS['OPTIONS']['GET_TIME']] = $str;
+                $this->paras_m[opt('GET_TIME')] = $str;
                 break;
             //half of day ago
             case 'j':
                 $this->paras['tbs'] .= 'qdr:h12';
-                $this->paras2[$GLOBALS['OPTIONS']['GET_TIME']] = $str;
+                $this->paras_m[opt('GET_TIME')] = $str;
                 break;
             //a hour ago
             case 'h':
                 $this->paras['tbs'] .= 'qdr:h';
-                $this->paras2[$GLOBALS['OPTIONS']['GET_TIME']] = $str;
+                $this->paras_m[opt('GET_TIME')] = $str;
                 break;
             //a day ago
             case 'd':
                 $this->paras['tbs'] .= 'qdr:d';
-                $this->paras2[$GLOBALS['OPTIONS']['GET_TIME']] = $str;
+                $this->paras_m[opt('GET_TIME')] = $str;
                 break;
             //a weekend ago
             case 'w':
                 $this->paras['tbs'] .= 'qdr:w';
-                $this->paras2[$GLOBALS['OPTIONS']['GET_TIME']] = $str;
+                $this->paras_m[opt('GET_TIME')] = $str;
                 break;
             //a month ago
             case 'm':
                 $this->paras['tbs'] .= 'qdr:m';
-                $this->paras2[$GLOBALS['OPTIONS']['GET_TIME']] = $str;
+                $this->paras_m[opt('GET_TIME')] = $str;
                 break;
             //a year ago
             case 'y':
                 $this->paras['tbs'] .= 'qdr:y';
-                $this->paras2[$GLOBALS['OPTIONS']['GET_TIME']] = $str;
+                $this->paras_m[opt('GET_TIME')] = $str;
                 break;
             default:
                 return False;
