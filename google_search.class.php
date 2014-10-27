@@ -3,7 +3,7 @@
  * class for parsing google search results
  * @license GNU LGPL Ver 3.0
  * @package google-alias
- * @author celend0
+ * @author celend
  * @date 14-10-27
  */
 function opt($key){
