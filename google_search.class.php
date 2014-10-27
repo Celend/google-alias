@@ -6,9 +6,6 @@
  * @author celend
  * @date 14-10-27
  */
-function opt($key){
-    return $GLOBALS['OPTIONS'][$key];
-}
 class search{
     private $cookie = array();
     private $content = '';

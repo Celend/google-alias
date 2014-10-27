@@ -121,12 +121,12 @@ EOT;
               </a>
             </td>
 EOT;
-    private $page_p = '<span class="t-prev">上一页</div>';
+    private $page_p = '<span class="t-prev">上一页</span>';
     private $page_o1 = <<<EOT
             <td>
               <a class="nav-a">
                 <span class="csb c-o1"></span>
-                <span class="nav-n"><{num}></div>
+                <span class="nav-n"><{num}></span>
               </a>
             </td>
 EOT;
@@ -134,7 +134,7 @@ EOT;
             <td>
               <a <{href}> class="nav-a">
                 <span class="csb c-o2"></span>
-                <span class="nav-n"><{num}></div>
+                <span class="nav-n"><{num}></span>
               </a>
             </td>
 EOT;
@@ -142,7 +142,7 @@ EOT;
             <td>
               <a <{href}> class="nav-a s-next">
                 <span class="csb c-gle"></span>
-                <span class="t-next">下一页</div>
+                <span class="t-next">下一页</span>
               </a>
             </td>
           </tr>
@@ -154,12 +154,18 @@ EOT;
     public $g = '';
     function __construct($Google_search = null){
         $tle = 'Google Alias Search';
-        $this->g = $Google_search;
-        $this->is_start = str_replace('<{GET_Q}>', $GLOBALS['OPTIONS']['GET_Q'], $this->s_start);
-        $this->head = str_replace('<{title}>', $this->g->get_key().' - '.$tle, $this->head);
-        $this->s_start = str_replace('<{GET_Q}>', $GLOBALS['OPTIONS']['GET_Q'], $this->s_start);
-        $this->type = 1;
-        return $this;
+        if(@get_class($Google_search) == 'search'){
+            $this->g = $Google_search;
+            $this->is_start = str_replace('<{GET_Q}>', $GLOBALS['OPTIONS']['GET_Q'], $this->s_start);
+            $this->head = str_replace('<{title}>', $this->g->get_key().' - '.$tle, $this->head);
+            $this->s_start = str_replace('<{GET_Q}>', $GLOBALS['OPTIONS']['GET_Q'], $this->s_start);
+            $this->type = 1;
+        }
+        else{
+            $this->type = 0;
+            $this->index_body = str_replace('<{GET_Q}>', $GLOBALS['OPTIONS']['GET_Q'], $this->index_body);
+            $this->head = str_replace('<{title}>', $tle, $this->head);
+        }
     }
     /**
      * set the class
@@ -174,8 +180,9 @@ EOT;
     }
     function show(){
         if($this->type){
-            if($this->g == '')
+            if($this->g == ''){
                 return FALSE;
+            }
             if($this->g->status['errno']){
                 echo "ERROR";
                 return FALSE;

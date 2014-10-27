@@ -40,4 +40,6 @@ $headers = array(
 );
 if(HAVE_GZIP && $GLOBALS['OPTIONS']['ENABLE_GZIP'])
     $headers[] = 'accept-encoding:gzip,deflate';
-
+function opt($key){
+    return $GLOBALS['OPTIONS'][$key];
+}
