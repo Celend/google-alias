@@ -6,9 +6,9 @@
  * @author celend
  * @date 14-10-27
  */
-if(!defined('QUOTE')){
+/*if(!defined('QUOTE')){
     exit('Access Denied!');
-}
+}*/
 class view {
 
     private $type = 0;
@@ -72,10 +72,26 @@ EOT;
   </div>
   <div class="search-tool-bar">
 EOT;
+    private $s_end = <<<EOT
+  </div>
+</body>
+</html>
+EOT;
+    private $notfound = <<<EOT
+    <div>
+      <p style="padding-top:.33em"> 找不到和您的查询 "<em><{key}></em>" 相符的内容或信息。 </p>
+      <p style="margin-top:1em">建议：</p>
+      <ul style="margin-left:1.3em;margin-bottom:2em">
+        <li>请检查输入字词有无错误。</li>
+        <li>请尝试其他的查询词</li>
+        <li>请改用较常见的字词。</li>
+      </ul>
+    </div>
+EOT;
     private $toobar_s = <<<EOT
   <div class="tool-box">
     <div class="search-info" id="search-info">
-      找到约 <{num}> 条结果, 用时 <{second}> 秒.
+      <{status}>
     </div>
     <div id="tool-panel" style="display: none">
       <ui>
@@ -103,11 +119,7 @@ EOT;
   <div class="search-res">
     <div style="border-bottom: 1px #e5e5e5 solid;">
 EOT;
-    private $s_end = <<<EOT
-  </div>
-</body>
-</html>
-EOT;
+    private $toobar_status = '找到约 <{num}> 条结果, 用时 <{second}> 秒.';
     private $page_G = <<<EOT
   </div>
     <div class="navcnt">
@@ -152,7 +164,7 @@ EOT;
 
 EOT;
     public $g = '';
-    function __construct($Google_search = null){
+    function __construct(search $Google_search = null){
         $tle = 'Google Alias Search';
         if(@get_class($Google_search) == 'search'){
             $this->g = $Google_search;
@@ -184,7 +196,13 @@ EOT;
                 return FALSE;
             }
             if($this->g->status['errno']){
-                echo "ERROR";
+                if($this->g->status['errno'] == 404){
+                    echo $this->head;
+                    echo str_replace('<{key}>', $this->g->get_key(),$this->s_start);
+                    $this->show_tool_bar();
+                    echo str_replace('<{key}>', $this->g->get_key(), $this->notfound);
+                    echo $this->s_end;
+                }
                 return FALSE;
             }
             echo $this->head;
@@ -228,13 +246,24 @@ EOT;
         foreach($t2 as $v){
             $fill2 .= '<a class="t-l" href="'.$this->g->get_url(array(opt('GET_TIME') => $v)).'"><li class="opt">'.$v.'</li></a>';
         }
-        echo str_replace('<{second}>', @$this->g->status['time'],
-            str_replace('<{num}>', @$this->g->status['res_num'],
-                str_replace('<{fill1}>', $fill1,
-                    str_replace('<{fill2}>', $fill2,$this->toobar_s)
+        if($this->g->status['errno'] == 404){
+            echo str_replace('<{status}>' , '&nbsp;',
+                    str_replace('<{fill1}>', $fill1,
+                        str_replace('<{fill2}>', $fill2,$this->toobar_s)
+                    )
+                );
+        }
+        else{
+            echo str_replace('<{second}>', @$this->g->status['time'],
+                str_replace('<{num}>', @$this->g->status['res_num'],
+                    str_replace('<{fill1}>', $fill1,
+                        str_replace('<{fill2}>', $fill2,
+                            str_replace('<{status}>', $this->toobar_status, $this->toobar_s)
+                        )
+                    )
                 )
-            )
-        );
+            );
+        }
         echo $this->toobar_e;
     }
     private function show_page(){
