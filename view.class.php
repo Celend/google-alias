@@ -244,7 +244,7 @@ EOT;
             $fill1 .= '<a class="t-l" href="'.$this->g->get_url(array(opt('GET_TIME') => $k)).'"><li class="opt">'.$v.'</li></a>';
         }
         foreach($t2 as $v){
-            $fill2 .= '<a class="t-l" href="'.$this->g->get_url(array(opt('GET_TIME') => $v)).'"><li class="opt">'.$v.'</li></a>';
+            $fill2 .= '<a class="t-l" href="'.$this->g->get_url(array(opt('GET_NUM') => $v)).'"><li class="opt">'.$v.'</li></a>';
         }
         if($this->g->status['errno'] == 404){
             echo str_replace('<{status}>' , '&nbsp;',
