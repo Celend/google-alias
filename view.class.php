@@ -4,12 +4,11 @@
  * @license GNU LGPL Ver 3.0
  * @package google-alias
  * @author celend
- * @date 14-10-15
+ * @date 14-10-27
  */
 if(!defined('QUOTE')){
     exit('Access Denied!');
 }
-
 class view {
 
     private $type = 0;
@@ -152,37 +151,19 @@ EOT;
     </div>
 
 EOT;
-    public $data = '';
-
-    /**
-     * @param google_search class $Google_search
-     * @return this
-     */
-    function __construct($Google_search = ''){
+    public $g = '';
+    function __construct($Google_search = null){
         $tle = 'Google Alias Search';
-        if(@get_class($Google_search) == 'Google_search'){
-            $this->data = $Google_search;
-            $this->is_start = str_replace('<{GET_Q}>', $GLOBALS['OPTIONS']['GET_Q'], $this->s_start);
-            $this->head = str_replace('<{title}>', $this->data->key_word.' - '.$tle, $this->head);
-            $this->s_start = str_replace('<{GET_Q}>', $GLOBALS['OPTIONS']['GET_Q'], $this->s_start);
-            $this->type = 1;
-        }
-        else{
-            $this->type = 0;
-            $this->index_body = str_replace('<{GET_Q}>', $GLOBALS['OPTIONS']['GET_Q'], $this->index_body);
-            $this->head = str_replace('<{title}>', $tle, $this->head);
-        }
-        return $this;
-    }
-    /**
-    * set the class
-    */
-    public function set_data($Google_search){
-        if(get_class($Google_search) != 'Google_search')
-            return FALSE;
+        $this->g = $Google_search;
+        $this->is_start = str_replace('<{GET_Q}>', $GLOBALS['OPTIONS']['GET_Q'], $this->s_start);
+        $this->head = str_replace('<{title}>', $this->g->get_key().' - '.$tle, $this->head);
+        $this->s_start = str_replace('<{GET_Q}>', $GLOBALS['OPTIONS']['GET_Q'], $this->s_start);
         $this->type = 1;
         return $this;
     }
+    /**
+     * set the class
+     */
     public function set_type($str){
         switch($str){
             case 'index': $this->type = 0;break;
@@ -193,16 +174,16 @@ EOT;
     }
     function show(){
         if($this->type){
-            if($this->data == '')
+            if($this->g == '')
                 return FALSE;
-            if($this->data->errno){
+            if($this->g->status['errno']){
                 echo "ERROR";
                 return FALSE;
             }
             echo $this->head;
-            echo str_replace('<{key}>', $this->data->key_word,$this->s_start);
+            echo str_replace('<{key}>', $this->g->get_key(),$this->s_start);
             $this->show_tool_bar();
-            foreach($this->data->results as $v){
+            foreach($this->g->results as $v){
                 if($v['id'] != "")
                     continue;
                 echo str_replace('<{disc}>', $v['info'],
@@ -235,24 +216,24 @@ EOT;
         $fill1 = '';
         $fill2 = '';
         foreach($t1 as $k => $v){
-            $fill1 .= '<a class="t-l" href="'.$this->data->get_url_withparas($GLOBALS['OPTIONS']['GET_TIME'], $k).'"><li class="opt">'.$v.'</li></a>';
+            $fill1 .= '<a class="t-l" href="'.$this->g->get_url(array(opt('GET_TIME') => $k)).'"><li class="opt">'.$v.'</li></a>';
         }
         foreach($t2 as $v){
-            $fill2 .= '<a class="t-l" href="'.$this->data->get_url_withparas($GLOBALS['OPTIONS']['GET_NUM'], $v).'"><li class="opt">'.$v.'</li></a>';
+            $fill2 .= '<a class="t-l" href="'.$this->g->get_url(array(opt('GET_TIME') => $v)).'"><li class="opt">'.$v.'</li></a>';
         }
-        echo str_replace('<{second}>', $this->data->time,
-              str_replace('<{num}>', $this->data->res_num,
-                  str_replace('<{fill1}>', $fill1,
-                      str_replace('<{fill2}>', $fill2,$this->toobar_s)
-                  )
-             )
+        echo str_replace('<{second}>', @$this->g->status['time'],
+            str_replace('<{num}>', @$this->g->status['res_num'],
+                str_replace('<{fill1}>', $fill1,
+                    str_replace('<{fill2}>', $fill2,$this->toobar_s)
+                )
+            )
         );
         echo $this->toobar_e;
     }
     private function show_page(){
         if(!$this->type)
             return FALSE;
-        $cp = $this->data->get_page();
+        $cp = $this->g->get_page();
         if($cp == 1){
             echo str_replace('<{href}>', '',
                 str_replace('<{page_p}>', '', $this->page_G)
@@ -261,7 +242,7 @@ EOT;
         else{
             echo str_replace('<{page_p}>', $this->page_p,
                 str_replace('<{href}>', 'href="'.
-                  $this->data->get_url_withpage(1).'"', $this->page_G)
+                    $this->g->get_url(array(opt('GET_PAGE') => 1)).'"', $this->page_G)
             );
         }
         if($cp <= 6){
@@ -272,8 +253,8 @@ EOT;
                     );
                 }
                 else{
-                    echo str_replace('<{href}>', 
-                      'href="'.$this->data->get_url_withpage($i).'"',
+                    echo str_replace('<{href}>',
+                        'href="'.$this->g->get_url(array(opt('GET_PAGE') => $i)).'"',
                         str_replace('<{num}>', $i, $this->page_o2)
                     );
                 }
@@ -287,13 +268,13 @@ EOT;
                     );
                 }
                 else{
-                    echo str_replace('<{href}>', 
-                      'href="'.$this->data->get_url_withpage($i).'"',
+                    echo str_replace('<{href}>',
+                        'href="'.$this->g->get_url(array(opt('GET_PAGE') => $i)).'"',
                         str_replace('<{num}>', $i, $this->page_o2)
                     );
                 }
             }
         }
-        echo str_replace('<{href}>', 'href="'.$this->data->get_url_withpage($cp + 1).'"', $this->page_g);
+        echo str_replace('<{href}>', 'href="'.$this->g->get_url(array(opt('GET_PAGE') => $cp + 1)).'"', $this->page_g);
     }
 } 
