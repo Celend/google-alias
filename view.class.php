@@ -4,7 +4,7 @@
  * @license GNU LGPL Ver 3.0
  * @package google-alias
  * @author celend
- * @date 14-10-15
+ * @date 14-10-27
  */
 if(!defined('QUOTE')){
     exit('Access Denied!');
@@ -175,8 +175,8 @@ EOT;
         return $this;
     }
     /**
-    * set the class
-    */
+     * set the class
+     */
     public function set_data($Google_search){
         if(get_class($Google_search) != 'Google_search')
             return FALSE;
@@ -241,11 +241,11 @@ EOT;
             $fill2 .= '<a class="t-l" href="'.$this->data->get_url_withparas($GLOBALS['OPTIONS']['GET_NUM'], $v).'"><li class="opt">'.$v.'</li></a>';
         }
         echo str_replace('<{second}>', $this->data->time,
-              str_replace('<{num}>', $this->data->res_num,
-                  str_replace('<{fill1}>', $fill1,
-                      str_replace('<{fill2}>', $fill2,$this->toobar_s)
-                  )
-             )
+            str_replace('<{num}>', $this->data->res_num,
+                str_replace('<{fill1}>', $fill1,
+                    str_replace('<{fill2}>', $fill2,$this->toobar_s)
+                )
+            )
         );
         echo $this->toobar_e;
     }
@@ -261,7 +261,7 @@ EOT;
         else{
             echo str_replace('<{page_p}>', $this->page_p,
                 str_replace('<{href}>', 'href="'.
-                  $this->data->get_url_withpage(1).'"', $this->page_G)
+                    $this->data->get_url_withpage(1).'"', $this->page_G)
             );
         }
         if($cp <= 6){
@@ -272,8 +272,8 @@ EOT;
                     );
                 }
                 else{
-                    echo str_replace('<{href}>', 
-                      'href="'.$this->data->get_url_withpage($i).'"',
+                    echo str_replace('<{href}>',
+                        'href="'.$this->data->get_url_withpage($i).'"',
                         str_replace('<{num}>', $i, $this->page_o2)
                     );
                 }
@@ -287,8 +287,8 @@ EOT;
                     );
                 }
                 else{
-                    echo str_replace('<{href}>', 
-                      'href="'.$this->data->get_url_withpage($i).'"',
+                    echo str_replace('<{href}>',
+                        'href="'.$this->data->get_url_withpage($i).'"',
                         str_replace('<{num}>', $i, $this->page_o2)
                     );
                 }

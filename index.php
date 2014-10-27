@@ -4,7 +4,7 @@
  * @license GNU LGPL Ver 3.0
  * @package google-alias
  * @author celend
- * @date 14-10-15
+ * @date 14-10-27
  */
 define("QUOTE", TRUE);
 error_reporting(E_ALL);
@@ -22,15 +22,15 @@ else{
     $p = isset($_GET[$GLOBALS['OPTIONS']['GET_PAGE']]) ? $_GET[$GLOBALS['OPTIONS']['GET_PAGE']] : 0;
     $d = isset($_GET[$GLOBALS['OPTIONS']['GET_TIME']]) ? $_GET[$GLOBALS['OPTIONS']['GET_TIME']] : FALSE;
     $n = isset($_GET[$GLOBALS['OPTIONS']['GET_NUM']])? (int) $_GET[$GLOBALS['OPTIONS']['GET_NUM']] : FALSE;
-    $g = new Google_search($q); 
+    $g = new search($q);
     if($n)
         $g->set_num($n);
     if($p)
         $g->set_page($p);
     if($d)
-        $g->set_time_limit($d);
+        $g->set_time($d);
     $g->load();
     $g->get_results();
-    $v = new view($g, $g->key_word.' - Google Alias Search', 'search');
+    $v = new view($g, $g->get_key().' - Google Alias Search', 'search');
     $v->show();
 }
