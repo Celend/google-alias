@@ -44,7 +44,7 @@ class search{
         $this->status['errno'] = curl_errno($ch);
         if($this->status['errno'])
             return FALSE;
-        if(HAVE_GZIP && opt('GZIP_ENABLE'))
+        if(HAVE_GZIP && opt('ENABLE_GZIP'))
             $this->content = zlib_decode($this->content);
         $this->remove_css_and_js();
         preg_match('`<div id="resultStats"[^>]*>[^\d]*([\d,]*)[^<]*<nobr>[^\d]*([\d\.]*)[^<]*</nobr></div>`m', $this->content, $r);
@@ -74,7 +74,7 @@ class search{
      * @param $arr
      * @return string
      */
-    public static function arr2url($arr){
+    public static function arr2url(array $arr){
         if(!is_array($arr))
             return FALSE;
         $s = '';
