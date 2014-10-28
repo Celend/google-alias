@@ -31,4 +31,6 @@ else{
         $g->set_time($d);
     $g->load();
     $g->get_results();
+    $s = new view($g);
+    $s->show();
 }
