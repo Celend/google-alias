@@ -225,7 +225,7 @@ class search{
             $id_reg = '@<li[^>]+class="g"[^>]?(?:id="([^"]*)")?[^>]*>@s';
             preg_match($id_reg, $s[$i], $r);
             $id = isset($r[1]) ? $r[1] : '';
-            $href_reg = '@<h3[^>]+class="r"><a href="([^"]*)"[^>]*>(.*?)</a>@s';
+            $href_reg = '@<h3[^>]+class="r">.*?<a href="([^"]*)"[^>]*>(.*?)</a>@s';
             preg_match($href_reg, $s[$i], $r);
             $href = isset($r[1]) ? $r[1] : '';
             $tle  = isset($r[2]) ? $r[2] : '';
@@ -236,6 +236,17 @@ class search{
             preg_match($site_reg, $s[$i], $r);
             $site = isset($r[1]) ? $r[1] : '';
             $this->results[] = array('id' => $id, 'url' => $href, 'title' => $tle, 'info' => $disc, 'site' => $site);
+        }
+        //related searches
+        preg_match_all('@<p class="_e4b"><a[^>]+>(.*?)</a>@s', $this->content, $r, PREG_SET_ORDER);
+        if(count($r) > 0){
+            $this->results['related'] = array();
+            foreach($r as $v){
+                $this->results['related'][] = $v[1];
+            }
+        }
+        else{
+            $this->results['related'] = FALSE;
         }
         return $this;
     }
@@ -270,8 +281,7 @@ class search{
     public function get_key(){
         return $this->paras['q'];
     }
-    //debug
-    public function debug_url(){
-        return search::url.$this->arr2url($this->paras);
+    public function get_key_url($key){
+        return './?'.opt('GET_Q').'='.$key;
     }
 };

@@ -163,6 +163,13 @@ EOT;
     </div>
 
 EOT;
+
+    private $rel_s = <<<EOT
+    <div style="border-top: 1px solid #e5e5e5;padding-bottom: 30px;"><h3 class="med" style="color:gray"><{key}>的相关搜索</h3>
+EOT;
+    private $rel_r_s = '<div class="row">';
+    private $rel_tmp = "        <p class=\"_e4b\"><a href=\"<{href}>\"><{tle}></a></p>\n";
+
     public $g = '';
     function __construct(search $Google_search = null){
         $tle = 'Google Alias Search';
@@ -208,9 +215,12 @@ EOT;
             echo $this->head;
             echo str_replace('<{key}>', $this->g->get_key(),$this->s_start);
             $this->show_tool_bar();
-            foreach($this->g->results as $v){
-                if($v['id'] != "")
+            foreach($this->g->results as $k => $v){
+                if(((int) $k) == FALSE)
                     continue;
+                if($v['id'] != ""){
+                    continue;
+                }
                 echo str_replace('<{disc}>', $v['info'],
                     str_replace('<{site}>', $v['site'],
                         str_replace('<{tle}>', $v['title'],
@@ -219,6 +229,8 @@ EOT;
                     )
                 );
             }
+            if($this->g->results['related'])
+                $this->show_related();
             $this->show_page();
             echo $this->s_end;
         }
@@ -312,5 +324,22 @@ EOT;
             }
         }
         echo str_replace('<{href}>', 'href="'.$this->g->get_url(array(opt('GET_PAGE') => $cp + 1)).'"', $this->page_g);
+    }
+    private function show_related(){
+        $i = 0;
+        echo str_replace('<{key}>', $this->g->get_key(), $this->rel_s);
+        foreach($this->g->results['related'] as $v){
+            if($i % 5 == 0){
+                echo $this->rel_r_s;
+            }
+            echo str_replace('<{href}>', $this->g->get_key_url($v),
+                str_replace('<{tle}>', $v, $this->rel_tmp)
+            );
+            if(($i + 1) % 5 == 0){
+                echo '</div>';
+            }
+            $i++;
+        }
+        echo '</div>';
     }
 } 
