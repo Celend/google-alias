@@ -64,7 +64,7 @@ EOT;
     </div>
   </a>
     <div class="s-search-bar">
-      <form action="./" method="get" onsubmit="return true">
+      <form action="./" method="get" onsubmit="return document.getElementsByClassName('s-q')[0] == '' ? return false : return true">
         <input type="text" value="<{key}>" name="<{GET_Q}>" class="s-q"/>
         <button type="submit" class="i-search-bu">
       </form>
