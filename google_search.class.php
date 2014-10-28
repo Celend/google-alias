@@ -7,9 +7,9 @@
  * @date 14-10-27
  */
 class search{
-    private $cookie = array();
     private $content = '';
     private $paras = array();
+    private $headers = array();
 
     public $paras_m = array();
     public $status = array();
@@ -22,9 +22,12 @@ class search{
      * @param string $keywork
      */
     function __construct($keywork){
+        global $headers;
+        $this->headers =$headers;
         $this->paras['q'] = $keywork;
         $this->paras_m[opt('GET_Q')] = $keywork;
-        $this->paras['num'] = opt('NUM');
+        if(!isset($this->paras['num']))
+            $this->paras['num'] = opt('NUM');
         if(opt('SAFE_SEARCH'))
             $this->paras['safe'] = 'strict';
         $this->paras['start'] = 0;
@@ -36,10 +39,9 @@ class search{
      * @return $this
      */
     public function load(){
-        global $headers;
         $paras = $this->arr2url($this->paras);
         $ch = curl_init(search::url.$paras);
-        curl_setopt_array($ch, $headers);
+        curl_setopt_array($ch, $this->headers);
         $this->content = curl_exec($ch);
         $this->status['errno'] = curl_errno($ch);
         if($this->status['errno'])
