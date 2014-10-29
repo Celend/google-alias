@@ -6,9 +6,9 @@
  * @author celend
  * @date 14-10-27
  */
-/*if(!defined('QUOTE')){
+if(!defined('QUOTE')){
     exit('Access Denied!');
-}*/
+}
 class view {
 
     private $type = 0;
