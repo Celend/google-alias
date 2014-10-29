@@ -225,7 +225,7 @@ class search{
             $id_reg = '@<li[^>]+class="g"[^>]?(?:id="([^"]*)")?[^>]*>@s';
             preg_match($id_reg, $s[$i], $r);
             $id = isset($r[1]) ? $r[1] : '';
-            $href_reg = '@<h3[^>]+class="r">.*?<a href="([^"]*)"[^>]*>(.*?)</a>@s';
+            $href_reg = '@<h3[^>]+class="r">.*?<a[^>]+href="([^"]*)"[^>]*>(.*?)</a>@s';
             preg_match($href_reg, $s[$i], $r);
             $href = isset($r[1]) ? $r[1] : '';
             $tle  = isset($r[2]) ? $r[2] : '';
