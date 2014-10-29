@@ -216,7 +216,7 @@ EOT;
             echo str_replace('<{key}>', $this->g->get_key(),$this->s_start);
             $this->show_tool_bar();
             foreach($this->g->results as $k => $v){
-                if(((int) $k) == FALSE)
+                if(((int) $k) == FALSE && $k !== 0)
                     continue;
                 if($v['id'] != ""){
                     continue;
