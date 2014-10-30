@@ -290,7 +290,7 @@ EOT;
         else{
             echo str_replace('<{page_p}>', $this->page_p,
                 str_replace('<{href}>', 'href="'.
-                    $this->g->get_url(array(opt('GET_PAGE') => 1)).'"', $this->page_G)
+                    $this->g->get_url(array(opt('GET_PAGE') => ($cp - 1))).'"', $this->page_G)
             );
         }
         if($cp <= 6){
