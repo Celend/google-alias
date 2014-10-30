@@ -19,7 +19,7 @@ else{
     require_once 'google_search.class.php';
     require_once 'view.class.php';
     $q = $_GET[opt('GET_Q')];
-    $h = isset($_GET[opt('GET_LANG')]) ? $_GET[opt('GET_PAGE')] : FALSE;
+    $h = isset($_GET[opt('GET_LANG')]) ? $_GET[opt('GET_LANG')] : FALSE;
     $p = isset($_GET[opt('GET_PAGE')]) ? $_GET[opt('GET_PAGE')] : 0;
     $d = isset($_GET[opt('GET_TIME')]) ? $_GET[opt('GET_TIME')] : FALSE;
     $n = isset($_GET[opt('GET_NUM')]) ? (int) $_GET[opt('GET_NUM')] : FALSE;
