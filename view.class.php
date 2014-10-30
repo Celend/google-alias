@@ -66,12 +66,15 @@ EOT;
     <div class="s-search-bar">
       <form action="./" method="get" onsubmit="return document.getElementsByClassName('s-q')[0].value == '' ? false : true">
         <input type="text" value="<{key}>" name="<{GET_Q}>" class="s-q"/>
+        <{fill1}>
         <button type="submit" class="i-search-bu"></button>
       </form>
     </div>
   </div>
   <div class="search-tool-bar">
 EOT;
+    private $reset = '<li class="no-sel tool-btn-b" id="clear">重置</li>';
+    private $hidden_field = '<input class="hd-fd" type="hidden" name="<{name}>" value="<{value}>" />';
     private $s_end = <<<EOT
   </div>
 </body>
@@ -98,6 +101,8 @@ EOT;
           <ui>
             <li class="no-sel tool tool-time" id="time">时间限制<span class="dwn-tri">&#9660;</span></li>
             <li class="no-sel tool" id="num">每页结果数<span class="dwn-tri">&#9660;</span></li>
+            <li class="no-sel tool" id="lang">语言<span class="dwn-tri">&#9660;</span></li>
+            <{fill3}>
           </ui>
         </div>
       </div>
@@ -109,6 +114,11 @@ EOT;
       <div class="tool-al" id="tool-num" style="display: none;left: 296px;">
         <ui style="list-style: none;">
           <{fill2}>
+        </ui>
+      </div>
+      <div class="tool-al" id="tool-lang" style="display: none;left: 400px;">
+        <ui style="list-style: none;">
+          <{fill4}>
         </ui>
       </div>
     </div>
@@ -170,6 +180,7 @@ EOT;
     private $rel_r_s = '<div class="row">';
     private $rel_tmp = "        <p class=\"_e4b\"><a href=\"<{href}>\"><{tle}></a></p>\n";
 
+    private $have_hidden = FALSE;
     public $g = '';
     function __construct(search $Google_search = null){
         $tle = 'Google Alias Search';
@@ -202,10 +213,22 @@ EOT;
             if($this->g == ''){
                 return FALSE;
             }
+            $s = '';
+            $t = $this->g->get_commit_paras();
+            if(count($t) > 0){
+                $this->have_hidden = TRUE;
+                foreach($t as $k => $v){
+                    $s .= str_replace('<{name}>', $k,
+                        str_replace('<{value}>', $v, $this->hidden_field)
+                    );
+                }
+            }
             if($this->g->status['errno']){
                 if($this->g->status['errno'] == 404){
                     echo $this->head;
-                    echo str_replace('<{key}>', $this->g->get_key(),$this->s_start);
+                    echo str_replace('<{key}>', $this->g->get_key(),
+                        str_replace('<{fill1}>', $s ,$this->s_start)
+                    );
                     $this->show_tool_bar();
                     echo str_replace('<{key}>', $this->g->get_key(), $this->notfound);
                     echo $this->s_end;
@@ -213,7 +236,9 @@ EOT;
                 return FALSE;
             }
             echo $this->head;
-            echo str_replace('<{key}>', $this->g->get_key(),$this->s_start);
+            echo str_replace('<{key}>', $this->g->get_key(),
+                str_replace('<{fill1}>', $s ,$this->s_start)
+            );
             $this->show_tool_bar();
             foreach($this->g->results as $k => $v){
                 if(((int) $k) == FALSE && $k !== 0)
@@ -250,27 +275,44 @@ EOT;
             'y' => '一年前'
         );
         $t2 = array('10', '20', '30', '50', '100');
+        $t3 = array('zh-CN' => '中文-简体', 'en' => '英语',  'zh-TW' => '中文-繁体');
         $fill1 = '';
         $fill2 = '';
+        $fill4 = '';
         foreach($t1 as $k => $v){
             $fill1 .= '<a class="t-l" href="'.$this->g->get_url(array(opt('GET_TIME') => $k)).'"><li class="opt">'.$v.'</li></a>';
         }
         foreach($t2 as $v){
             $fill2 .= '<a class="t-l" href="'.$this->g->get_url(array(opt('GET_NUM') => $v)).'"><li class="opt">'.$v.'</li></a>';
         }
+        foreach($t3 as $k => $v){
+            $fill4 .= '<a class="t-l" href="'.$this->g->get_url(array(opt('GET_LANG') => $k)).'"><li class="opt">'.$v.'</li></a>';
+        }
+        if($this->have_hidden)
+            $s = $this->reset;
+        else
+            $s = '';
         if($this->g->status['errno'] == 404){
             echo str_replace('<{status}>' , '&nbsp;',
                     str_replace('<{fill1}>', $fill1,
-                        str_replace('<{fill2}>', $fill2,$this->toobar_s)
+                        str_replace('<{fill2}>', $fill2,
+                            str_replace('<{fill3}>', $s,
+                                str_replace('<{fill4}>', $fill4,$this->toobar_s)
+                            )
+                        )
                     )
                 );
-        }
+            }
         else{
-            echo str_replace('<{second}>', @$this->g->status['time'],
-                str_replace('<{num}>', @$this->g->status['res_num'],
+            echo str_replace('<{second}>', $this->g->status['time'],
+                str_replace('<{num}>', $this->g->status['res_num'],
                     str_replace('<{fill1}>', $fill1,
                         str_replace('<{fill2}>', $fill2,
-                            str_replace('<{status}>', $this->toobar_status, $this->toobar_s)
+                            str_replace('<{status}>', $this->toobar_status,
+                                str_replace('<{fill3}>', $s,
+                                    str_replace('<{fill4}>', $fill4,$this->toobar_s)
+                                )
+                            )
                         )
                     )
                 )

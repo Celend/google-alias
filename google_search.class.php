@@ -284,4 +284,14 @@ class search{
     public function get_key_url($key){
         return './?'.opt('GET_Q').'='.$key;
     }
+    public function get_commit_paras(){
+        $paras = array();
+        if(isset($this->paras_m[opt('GET_NUM')]))
+            $paras[opt('GET_NUM')] = $this->paras_m[opt('GET_NUM')];
+        if(isset($this->paras_m[opt('GET_LANG')]))
+            $paras[opt('GET_LANG')] = $this->paras_m[opt('GET_LANG')];
+        if(isset($this->paras_m[opt('GET_TIME')]))
+            $paras[opt('GET_TIME')] = $this->paras_m[opt('GET_TIME')];
+        return $paras;
+    }
 };

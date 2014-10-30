@@ -321,6 +321,7 @@ a:visited {
 .tool-time{
     position: relative;
     left: -25px;
+    margin-right: -25px;
 }
 .dwn-tri{
     font-size: .7em;
@@ -372,6 +373,20 @@ a:visited {
     max-width: 280px;
     overflow: hidden;
     margin-right: 20px;
+}
+#clear{
+    letter-spacing: 2px;
+    color: #db4823;
+    padding: 8px 9px 5px 8px;
+    list-style: none;
+    float: right;
+    margin: -6px 10px 0 0;
+}
+#clear:hover{
+    border: 1px solid #c6c6c6;
+    padding: 7px 8px 5px 8px;
+    border-radius: 2px ;
+    background: #f1f1f1;
 }
 @media screen and (max-width: 780px){
 	.s-logo {
