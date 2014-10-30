@@ -76,6 +76,7 @@ EOT;
     private $reset = '<li class="no-sel tool-btn-b" id="clear">重置</li>';
     private $hidden_field = '<input class="hd-fd" type="hidden" name="<{name}>" value="<{value}>" />';
     private $s_end = <<<EOT
+    </div>
   </div>
 </body>
 </html>
