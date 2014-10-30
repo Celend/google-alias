@@ -19,6 +19,7 @@ else{
     require_once 'google_search.class.php';
     require_once 'view.class.php';
     $q = $_GET[opt('GET_Q')];
+    $h = isset($_GET[opt('GET_LANG')]) ? $_GET[opt('GET_PAGE')] : FALSE;
     $p = isset($_GET[opt('GET_PAGE')]) ? $_GET[opt('GET_PAGE')] : 0;
     $d = isset($_GET[opt('GET_TIME')]) ? $_GET[opt('GET_TIME')] : FALSE;
     $n = isset($_GET[opt('GET_NUM')]) ? (int) $_GET[opt('GET_NUM')] : FALSE;
@@ -29,6 +30,9 @@ else{
         $g->set_page($p);
     if($d)
         $g->set_time($d);
+    if($h){
+        $g->set_lang($h);
+    }
     $g->load();
     $g->get_results();
     $s = new view($g);
