@@ -6,32 +6,22 @@
  * @date 14-10-15
  */
 $( document ).ready(function(){
-    $('#tool-btn').on('click', function(e){
+    $('.tool-btn').on('click', function(e){
         $('.tool-al').hide();
-        if($('#search-info').is(':visible')){
-            $('#search-info').stop().animate({
-                'top': '-30px'
-            }, 150, function(){
-                $(this).hide();
-                $('#tool-panel').show().animate({
-                    'top':0
-                },75, function(){
-                    $('.search-tool-bar').css('overflow', 'visible');
-                });
-            });
+        if(!$('#tool-panel').is(':visible')){
             $(this).removeClass('tool-btn').addClass('tool-btn-press');
+            $('#tool-panel').show();
+            $('#search-info').animate({
+                'marginTop': '-40px'
+            }, 150);
         }
         else{
-            $('.search-tool-bar').css('overflow', 'hidden');
-            $('#tool-btn').removeClass('tool-btn-press').addClass('tool-btn');
-            $('#tool-panel').stop().animate({
-                'top': '30px'
+            $(this).removeClass('tool-btn-press').addClass('tool-btn');
+            $('#search-info').animate({
+                'marginTop': 0
             }, 150, function(){
-                $(this).hide();
-                $('#search-info').show().animate({
-                    'top': 0
-                }, 75);
-            })
+                $('#tool-panel').hide();
+            });
         }
     });
     $('.tool').on('click', function(e){
@@ -45,7 +35,7 @@ $( document ).ready(function(){
                 num.show();
             $('body').one('click', function(e){
                 num.hide();
-            })
+            });
             return false;
         }
         else if(type == 'time'){
@@ -56,8 +46,8 @@ $( document ).ready(function(){
                 time.show();
             $('body').one('click', function(e){
                 time.hide();
-            })
+            });
             return false;
         }
     });
-})
+});

@@ -66,7 +66,7 @@ EOT;
     <div class="s-search-bar">
       <form action="./" method="get" onsubmit="return document.getElementsByClassName('s-q')[0].value == '' ? false : true">
         <input type="text" value="<{key}>" name="<{GET_Q}>" class="s-q"/>
-        <button type="submit" class="i-search-bu">
+        <button type="submit" class="i-search-bu"></button>
       </form>
     </div>
   </div>
@@ -89,30 +89,30 @@ EOT;
     </div>
 EOT;
     private $toobar_s = <<<EOT
-  <div class="tool-box">
-    <div class="search-info" id="search-info">
-      <{status}>
-    </div>
-    <div id="tool-panel" style="display: none">
-      <ui>
-        <li class="no-sel tool tool-time" id="time">时间限制<span class="dwn-tri">&#9660;</span></li>
-        <div class="tool-al" id="tool-time" style="display: none;left:15px;">
-          <ui style="list-style: none;">
-            <{fill1}>
+    <div class="tf">
+      <div style="height: 39px;; overflow: hidden;">
+        <div class="search-info" id="search-info">
+          <{status}>
+        </div>
+        <div id="tool-panel">
+          <ui>
+            <li class="no-sel tool tool-time" id="time">时间限制<span class="dwn-tri">&#9660;</span></li>
+            <li class="no-sel tool" id="num">每页结果数<span class="dwn-tri">&#9660;</span></li>
           </ui>
         </div>
-        <li class="no-sel tool" id="num">每页结果数<span class="dwn-tri">&#9660;</span></li>
-        <div class="tool-al" id="tool-num" style="display: none;left: 150px;">
-          <ui style="list-style: none;">
-            <{fill2}>
-          </ui>
-        </div>
-      </ui>
+      </div>
+      <div class="tool-al" id="tool-time" style="display: none;left:165px;">
+        <ui style="list-style: none;">
+          <{fill1}>
+        </ui>
+      </div>
+      <div class="tool-al" id="tool-num" style="display: none;left: 296px;">
+        <ui style="list-style: none;">
+          <{fill2}>
+        </ui>
+      </div>
     </div>
-  </div>
-  <div class="tool-btn-b tool-btn" id="tool-btn">
-    搜索工具
-  </div>
+    <div class="tool-btn no-sel tool-btn-b">搜索工具</div>
 EOT;
     private $toobar_e = <<<EOT
   </div>
