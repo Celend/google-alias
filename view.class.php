@@ -111,12 +111,12 @@ EOT;
           <{fill1}>
         </ui>
       </div>
-      <div class="tool-al" id="tool-num" style="display: none;left: 296px;">
+      <div class="tool-al" id="tool-num" style="display: none;left: 272px;">
         <ui style="list-style: none;">
           <{fill2}>
         </ui>
       </div>
-      <div class="tool-al" id="tool-lang" style="display: none;left: 400px;">
+      <div class="tool-al" id="tool-lang" style="display: none;left: 375px;">
         <ui style="list-style: none;">
           <{fill4}>
         </ui>
