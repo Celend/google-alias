@@ -88,7 +88,7 @@ function commit(input){
     return true;
 }
 window.onload = function(s){
-    if($('.i-q'))
+    if($('.i-q').length > 0)
         $('.i-q').focus();
     else{
         $('.s-q').focus();
@@ -105,4 +105,23 @@ window.onload = function(s){
     }
     return true;
 };
-window.onkeydown
+window.onkeydown = function(e){
+    if($('.s-q').is(':focus') || $('.i-q').is(':focus'))
+        return true;
+    if(e.altKey && (e.key == 'j' || 'j'.charCodeAt(0) - 32 == e.keyCode) && !e.shiftKey){
+        console.log('ok');
+        if($('.i-q').length > 0)
+            $('.i-q').focus();
+        else{
+            $('.s-q').focus();
+        }
+    }
+    else if(e.altKey && (e.key == 'i' || 'i'.charCodeAt(0) - 32 == e.keyCode) && !e.shiftKey){
+        if($('.i-q').length > 0)
+            $('.i-q').focus()[0].value = '';
+        else{
+            $('.s-q').focus()[0].value = '';
+        }
+    }
+    return true;
+}
