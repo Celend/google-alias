@@ -87,7 +87,22 @@ function commit(input){
     input.value = encrypt(temp, parseInt($('meta[name=urlencrypt]').attr('content'), 10));
     return true;
 }
-window.onload = function(){
-    $('.s-q').focus();
-    $('.i-q').focus();
-}
+window.onload = function(s){
+    if($('.i-q'))
+        $('.i-q').focus();
+    else{
+        $('.s-q').focus();
+        var s = $('.s-q')[0];
+        if(s.setSelectionRange){
+            s.setSelectionRange(s.value.length, s.value.length);
+        }
+        else{
+            var r = s.createTextRange();
+            r.collapse(true);
+            r.moveStart('character', s.value.length);
+            r.select();
+        }
+    }
+    return true;
+};
+window.onkeydown
