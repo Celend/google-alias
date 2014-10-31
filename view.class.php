@@ -38,7 +38,7 @@ EOT;
   <div class="i-keywork">
     <div class="i-search-bar">
       <form action="./" method="get" onsubmit="return commit(document.getElementsByClassName('i-q')[0])">
-        <input type="text" name="<{GET_Q}>" class="i-q">
+        <input type="text" name="<{GET_Q}>" class="i-q" autocomplete="off" />
         <button type="submit" class="i-search-bu">
         </button>
       </form>
@@ -66,7 +66,7 @@ EOT;
   </a>
     <div class="s-search-bar">
       <form action="./" method="get" onsubmit="return commit(document.getElementsByClassName('s-q')[0])">
-        <input type="text" value="<{key}>" name="<{GET_Q}>" class="s-q"/>
+        <input type="text" value="<{key}>" name="<{GET_Q}>" class="s-q" autocomplete="off" />
         <{fill1}>
         <button type="submit" class="i-search-bu"></button>
       </form>
