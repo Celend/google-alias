@@ -58,6 +58,7 @@ $( document ).ready(function(){
 });
 function encrypt(str, key){
     var s = '';
+    var t = '';
     for(var i = 0; i < str.length; ++i){
         if(encodeURI(str[i]) == str[i]){
             s += str[i];
@@ -67,7 +68,10 @@ function encrypt(str, key){
             c = c.split('%');
             var f = [];
             for(var j = 1; j < c.length; ++j){
-                f.push(parseInt(parseInt(c[j], 16) - key).toString(16).toLocaleUpperCase());
+                t = parseInt(parseInt(c[j], 16) - key).toString(16).toLocaleUpperCase();
+                if(t.length == 1)
+                    t = '0' + t;
+                f.push(t);
             }
             s += '%' + f.join('%');
         }
@@ -82,4 +86,8 @@ function commit(input){
         return true;
     input.value = encrypt(temp, parseInt($('meta[name=urlencrypt]').attr('content'), 10));
     return true;
+}
+window.onload = function(){
+    $('.s-q').focus();
+    $('.i-q').focus();
 }

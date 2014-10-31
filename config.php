@@ -62,7 +62,6 @@ function opt($key){
  * @return string
  */
 function decrypt($str, $key){
-    $str = strtoupper($str);
     if(substr($str, 0, 3) == '%FF')
         $str = substr($str, 3);
     $s = '';
@@ -72,7 +71,10 @@ function decrypt($str, $key){
             $s .= $str[$i];
         }
         else{
-            $s .= '%'.strtoupper(dechex(hexdec(substr($str, $i + 1, 2)) + $key));
+            $t = dechex(hexdec(substr($str, $i + 1, 2)) + $key);
+            if(strlen($t) == 1)
+                $t = '0'.$t;
+            $s .= '%'.$t;
             $i += 2;
         }
     }
@@ -92,7 +94,10 @@ function encrypt($str, $key){
             $c = explode('%', $c);
             $f = array();
             for($j = 1; $j < count($c); $j++){
-                $f[] = strtoupper(dechex(hexdec($c[$j]) - $key));
+                $t = strtoupper(dechex(hexdec($c[$j]) - $key));
+                if(strlen($t) == 1)
+                    $t = '0'.$t;
+                $f[] = $t;
             }
             $s .= '%'.implode('%', $f);
         }
