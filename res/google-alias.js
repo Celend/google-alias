@@ -56,3 +56,30 @@ $( document ).ready(function(){
         });
     })
 });
+function encrypt(str, key){
+    var s = '';
+    for(var i = 0; i < str.length; ++i){
+        if(encodeURI(str[i]) == str[i]){
+            s += str[i];
+        }
+        else{
+            var c = encodeURI(str[i]);
+            c = c.split('%');
+            var f = [];
+            for(var j = 1; j < c.length; ++j){
+                f.push(parseInt(parseInt(c[j], 16) - key).toString(16).toLocaleUpperCase());
+            }
+            s += '%' + f.join('%');
+        }
+    }
+    return '%FF' + s;
+}
+function commit(input){
+    var temp = input.value;
+    if (temp == "")
+        return false;
+    if($('meta[name=urlencrypt]').attr('content') == 'FALSE')
+        return true;
+    input.value = encrypt(temp, parseInt($('meta[name=urlencrypt]').attr('content'), 10));
+    return true;
+}

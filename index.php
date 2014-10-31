@@ -23,7 +23,12 @@ else{
     $p = isset($_GET[opt('GET_PAGE')]) ? $_GET[opt('GET_PAGE')] : 0;
     $d = isset($_GET[opt('GET_TIME')]) ? $_GET[opt('GET_TIME')] : FALSE;
     $n = isset($_GET[opt('GET_NUM')]) ? (int) $_GET[opt('GET_NUM')] : FALSE;
-    $g = new search($q);
+    if(substr($q, 0, 3) == '%FF' && opt('ENCRYPT')){
+        $g = new search(decrypt($q, opt('ENCRYPT_K')));
+    }
+    else{
+        $g = new search($q);
+    }
     if($n)
         $g->set_num($n);
     if($p)

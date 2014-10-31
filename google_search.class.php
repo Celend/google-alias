@@ -129,6 +129,7 @@ class search{
     public function set_lang($lang){
         $this->paras_m[opt('GET_LANG')] = $lang;
         $this->paras['hl'] = $lang;
+        $this->paras['lr'] = 'lang_'.$lang;
         return $this;
     }
 
@@ -276,13 +277,24 @@ class search{
         elseif($key !== null && $val !== null){
             $tmp[$key] = $val;
         }
+        if(opt('ENCRYPT')){
+            $tmp[opt('GET_Q')] = encrypt($tmp[opt('GET_Q')], opt('ENCRYPT_K'));
+        }
         return './?'.$this->arr2url($tmp);
     }
     public function get_key(){
         return $this->paras['q'];
     }
     public function get_key_url($key){
-        return './?'.opt('GET_Q').'='.$key;
+        $paras = array();
+        if(isset($this->paras_m[opt('GET_NUM')]))
+            $paras[opt('GET_NUM')] = $this->paras_m[opt('GET_NUM')];
+        if(isset($this->paras_m[opt('GET_LANG')]))
+            $paras[opt('GET_LANG')] = $this->paras_m[opt('GET_LANG')];
+        if(isset($this->paras_m[opt('GET_TIME')]))
+            $paras[opt('GET_TIME')] = $this->paras_m[opt('GET_TIME')];
+        $paras[opt('GET_Q')] = $key;
+        return $this->get_url($paras);
     }
     public function get_commit_paras(){
         $paras = array();

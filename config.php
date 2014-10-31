@@ -19,6 +19,8 @@ $GLOBALS['OPTIONS'] = array(
     'LANG'        => 'zh-CN',   //默认的搜索语言
     'ENABLE_GZIP' => TRUE,      //gzip 压缩, 启用之后可节省近3分之一的流量, 前提是有gzip的模块, 否则开启也是无效的.
     'TIMEOUT'     => 3,         //连接超时
+    'ENCRYPT'     => TRUE,     //URL参数加密
+    'ENCRYPT_K'   => 8,         //URL加密的密钥, 建议在正负10之内
     'NUM'         => 10,        //默认的每页结果数
     'GET_LANG'    => 'hl',      //设置语言的get键名
     'GET_Q'       => 'qq',      //查询内容的get键名
@@ -40,6 +42,60 @@ $headers = array(
 );
 if(HAVE_GZIP && $GLOBALS['OPTIONS']['ENABLE_GZIP'])
     $headers[] = 'accept-encoding:gzip';
+
+
+
+//functions
+/**
+ * get config
+ * @param string $key
+ * @return string
+ */
 function opt($key){
     return $GLOBALS['OPTIONS'][$key];
+}
+
+/**
+ * simple decryption
+ * @param string $str
+ * @param int $key
+ * @return string
+ */
+function decrypt($str, $key){
+    $str = strtoupper($str);
+    if(substr($str, 0, 3) == '%FF')
+        $str = substr($str, 3);
+    $s = '';
+    $len = strlen($str);
+    for($i = 0; $i < $len; ++$i){
+        if($str[$i] != '%'){
+            $s .= $str[$i];
+        }
+        else{
+            $s .= '%'.strtoupper(dechex(hexdec(substr($str, $i + 1, 2)) + $key));
+            $i += 2;
+        }
+    }
+    return urldecode($s);
+}
+function encrypt($str, $key){
+    $s = '';
+    for($i = 0; $i < strlen($str); $i++){
+        if($str[$i] == ' '){
+            $s .= '+';
+        }
+        elseif(urlencode($str[$i]) == $str[$i]){
+            $s .= $str[$i];
+        }
+        else{
+            $c = urlencode($str[$i]);
+            $c = explode('%', $c);
+            $f = array();
+            for($j = 1; $j < count($c); $j++){
+                $f[] = strtoupper(dechex(hexdec($c[$j]) - $key));
+            }
+            $s .= '%'.implode('%', $f);
+        }
+    }
+    return '%FF'.$s;
 }

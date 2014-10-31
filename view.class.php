@@ -21,6 +21,7 @@ class view {
   <meta name="description" content="Google Alias">
   <meta name="keywords" content="Google Alias">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="urlencrypt" content="<{encrypt}>" />
   <link rel="shortcut icon" type="image/x-icon" href="res/favicon.ico" />
   <link rel="stylesheet" type="text/css" href="res/google-alias.css" />
   <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
@@ -36,7 +37,7 @@ EOT;
   </div>
   <div class="i-keywork">
     <div class="i-search-bar">
-      <form action="./" method="get" onsubmit="return document.getElementsByClassName('i-q')[0].value==''?false:true">
+      <form action="./" method="get" onsubmit="return commit(document.getElementsByClassName('i-q')[0])">
         <input type="text" name="<{GET_Q}>" class="i-q">
         <button type="submit" class="i-search-bu">
         </button>
@@ -64,7 +65,7 @@ EOT;
     </div>
   </a>
     <div class="s-search-bar">
-      <form action="./" method="get" onsubmit="return document.getElementsByClassName('s-q')[0].value == '' ? false : true">
+      <form action="./" method="get" onsubmit="return commit(document.getElementsByClassName('s-q')[0])">
         <input type="text" value="<{key}>" name="<{GET_Q}>" class="s-q"/>
         <{fill1}>
         <button type="submit" class="i-search-bu"></button>
@@ -185,6 +186,7 @@ EOT;
     public $g = '';
     function __construct(search $Google_search = null){
         $tle = 'Google Alias Search';
+        $this->head = str_replace('<{encrypt}>', opt('ENCRYPT') ? opt('ENCRYPT_K') : 'FALSE', $this->head);
         if(@get_class($Google_search) == 'search'){
             $this->g = $Google_search;
             $this->is_start = str_replace('<{GET_Q}>', $GLOBALS['OPTIONS']['GET_Q'], $this->s_start);
