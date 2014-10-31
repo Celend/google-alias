@@ -109,7 +109,6 @@ window.onkeydown = function(e){
     if($('.s-q').is(':focus') || $('.i-q').is(':focus'))
         return true;
     if(e.altKey && (e.key == 'j' || 'j'.charCodeAt(0) - 32 == e.keyCode) && !e.shiftKey){
-        console.log('ok');
         if($('.i-q').length > 0)
             $('.i-q').focus();
         else{
