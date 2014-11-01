@@ -9,8 +9,10 @@
 class search{
     private $content = '';
     private $paras = array();
-    private $headers = array();
+    private $k; //content encrypt is enable
+    private $e; //content encrypt key
 
+    private $headers = array();
     public $paras_m = array();
     public $status = array();
     public $results = array();
@@ -23,6 +25,8 @@ class search{
      */
     function __construct($keywork){
         global $headers;
+        $this->k = opt('CON_ENC_K');
+        $this->e = opt('CON_ENC');
         $this->headers =$headers;
         $this->paras['q'] = $keywork;
         $this->paras_m[opt('GET_Q')] = $keywork;
@@ -225,17 +229,17 @@ class search{
         for($i = 0; $i < count($s); $i++){
             $id_reg = '@<li[^>]+class="g"[^>]?(?:id="([^"]*)")?[^>]*>@s';
             preg_match($id_reg, $s[$i], $r);
-            $id = isset($r[1]) ? $r[1] : '';
+            $id = isset($r[1]) ? $this->e ? encrypt($r[1], $this->k) : '' : '';
             $href_reg = '@<h3[^>]+class="r">.*?<a[^>]+href="([^"]*)"[^>]*>(.*?)</a>@s';
             preg_match($href_reg, $s[$i], $r);
-            $href = isset($r[1]) ? $r[1] : '';
-            $tle  = isset($r[2]) ? $r[2] : '';
+            $href = isset($r[1]) ? $this->e ? encrypt($r[1], $this->k) : '' : '';
+            $tle  = isset($r[2]) ? $this->e ? encrypt($r[2], $this->k) : '' : '';
             $disc_reg = '@<span[^>]+class="st"[^>]*>((?:<span[^>]+class="f">.*?</span>)?.*?)</span>@s';
             preg_match($disc_reg, $s[$i], $r);
-            $disc = isset($r[1]) ? $r[1] : '';
+            $disc = isset($r[1]) ? $this->e ? encrypt($r[1], $this->k) : '' : '';
             $site_reg = '@<cite[^>]+class="_Rm[^"]*"[^>]*>(.*?)</cite>@s';
             preg_match($site_reg, $s[$i], $r);
-            $site = isset($r[1]) ? $r[1] : '';
+            $site = isset($r[1]) ? $this->e ? encrypt($r[1], $this->k) : '' : '';
             $this->results[] = array('id' => $id, 'url' => $href, 'title' => $tle, 'info' => $disc, 'site' => $site);
         }
         //related searches
@@ -243,7 +247,7 @@ class search{
         if(count($r) > 0){
             $this->results['related'] = array();
             foreach($r as $v){
-                $this->results['related'][] = $v[1];
+                $this->results['related'][] = $this->e ? encrypt($v[1], $this->k) : '';
             }
         }
         else{
@@ -283,7 +287,7 @@ class search{
         return './?'.$this->arr2url($tmp);
     }
     public function get_key(){
-        return $this->paras['q'];
+        return $this->e ? encrypt($this->paras['q'], $this->k) : $this->paras['q'];
     }
     public function get_key_url($key){
         $paras = array();

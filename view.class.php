@@ -185,7 +185,7 @@ EOT;
     private $have_hidden = FALSE;
     public $g = '';
     function __construct(search $Google_search = null){
-        $tle = 'Google Alias Search';
+        $tle = opt('CON_ENC') ? encrypt('Google Alias Search', opt('CON_ENC_K')) : 'Google Alias Search';
         $this->head = str_replace('<{encrypt}>', opt('ENCRYPT') ? opt('ENCRYPT_K') : 'FALSE', $this->head);
         if(@get_class($Google_search) == 'search'){
             $this->g = $Google_search;
