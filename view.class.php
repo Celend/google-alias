@@ -381,7 +381,7 @@ EOT;
                 echo $this->rel_r_s;
             }
             echo str_replace('<{href}>', $this->g->get_key_url($v),
-                str_replace('<{tle}>', $v, $this->rel_tmp)
+                str_replace('<{tle}>', opt('CON_ENC') ? encrypt($v, opt('CON_ENC_K')) : $v, $this->rel_tmp)
             );
             if(($i + 1) % 5 == 0){
                 echo '</div>';
