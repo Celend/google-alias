@@ -82,8 +82,9 @@ function encrypt(str, key){
 //extend
 $.fn.decrypt = function(key){
     this.html(decrypt(this.html(), key));
+    return this;
 }
-var table = {'40':'@', '23':'#', '24':'$', '26':'&', '2F':'/', '3B':';', '3A':':', '3F':'?'};
+var table = {'40':'@', '23':'#', '24':'$', '26':'&', '2F':'/', '3B':';', '3A':':', '3F':'?', '2C':',', '3D':'='};
 function decrypt(str, key){
     if(str.substr(0, 3) == '%FF'){
         str = str.substr(3);
@@ -146,7 +147,8 @@ window.onload = function(s){
             $('#rel').decrypt(k);
         var s = $('.s-title');
         for(var i = 0; i < s.length; ++i){
-            $(s[i]).decrypt(k);
+            $(s[i]).attr('href', decrypt($(s[i]).decrypt(k).attr('href'), k));
+
         }
         s = $('.s-disc');
         for(i = 0; i < s.length; ++i){
