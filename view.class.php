@@ -375,7 +375,7 @@ EOT;
     }
     private function show_related(){
         $i = 0;
-        echo str_replace('<{key}>', $this->g->get_key(), $this->rel_s);
+        echo str_replace('<{key}>', opt('CON_ENC') ? encrypt($this->g->get_key(),opt('CON_ENC_K')) : $this->g->get_key(), $this->rel_s);
         foreach($this->g->results['related'] as $v){
             if($i % 5 == 0){
                 echo $this->rel_r_s;
