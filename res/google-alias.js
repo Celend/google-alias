@@ -83,7 +83,7 @@ function encrypt(str, key){
 $.fn.decrypt = function(key){
     this.html(decrypt(this.html(), key));
 }
-var table = {'40':'@', '23':'#', '24':'$', '26':'&', '2F':'/', '3B':';', '3A':':'};
+var table = {'40':'@', '23':'#', '24':'$', '26':'&', '2F':'/', '3B':';', '3A':':', '3F':'?'};
 function decrypt(str, key){
     if(str.substr(0, 3) == '%FF'){
         str = str.substr(3);
