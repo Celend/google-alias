@@ -78,6 +78,41 @@ function encrypt(str, key){
     }
     return '%FF' + s;
 }
+
+//extend
+$.fn.decrypt = function(key){
+    this.html(decrypt(this.html(), key));
+}
+var table = {'40':'@', '23':'#', '24':'$', '26':'&', '2F':'/', '3B':';', '3A':':'};
+function decrypt(str, key){
+    if(str.substr(0, 3) == '%FF'){
+        str = str.substr(3);
+    }
+    var t = '';
+    var s = '';
+    for(var i = 0; i < str.length; ++i){
+        if(str[i] == '+'){
+            s += ' ';
+        }
+        else if(str[i] != '%'){
+            s += str[i];
+        }
+        else{
+            t = parseInt(parseInt(str.substr(i + 1, 2), 16) + key).toString(16).toLocaleUpperCase();
+            if(s.length == 1){
+                t = '0' + t;
+            }
+            if(table[t] != undefined){
+                s += table[t];
+            }
+            else{
+                s += '%' + t;
+            }
+            i += 2;
+        }
+    }
+    return decodeURI(s);
+};
 function commit(input){
     var temp = input.value;
     if (temp == "")
@@ -101,6 +136,27 @@ window.onload = function(s){
             r.collapse(true);
             r.moveStart('character', s.value.length);
             r.select();
+        }
+    }
+    if($('meta[name=conencrypt]').attr('content') != 'FALSE' && $('.s-q').length > 0){
+        var k = Number($('meta[name=conencrypt]').attr('content'));
+        $('title').decrypt(k);
+        $('.s-q').attr('value', decrypt($('.s-q').attr('value'), k));
+        var s = $('.s-title');
+        for(var i = 0; i < s.length; ++i){
+            $(s[i]).decrypt(k);
+        }
+        s = $('.s-disc');
+        for(i = 0; i < s.length; ++i){
+            $(s[i]).decrypt(k);
+        }
+        s = $('.rel_a');
+        for(i = 0; i < s.length; ++i){
+            $(s[i]).decrypt(k);
+        }
+        s = $('.s-title-link');
+        for(i = 0; i < s.length; ++i){
+            $(s[i]).decrypt(k);
         }
     }
     return true;

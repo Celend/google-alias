@@ -287,7 +287,7 @@ class search{
         return './?'.$this->arr2url($tmp);
     }
     public function get_key(){
-        return $this->e ? encrypt($this->paras['q'], $this->k) : $this->paras['q'];
+        return  $this->paras['q'];
     }
     public function get_key_url($key){
         $paras = array();

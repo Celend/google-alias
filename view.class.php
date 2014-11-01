@@ -22,6 +22,7 @@ class view {
   <meta name="keywords" content="Google Alias">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="urlencrypt" content="<{encrypt}>" />
+  <meta name="conencrypt" content="<{conencrypt}>" />
   <link rel="shortcut icon" type="image/x-icon" href="res/favicon.ico" />
   <link rel="stylesheet" type="text/css" href="res/google-alias.css" />
   <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
@@ -84,7 +85,7 @@ EOT;
 EOT;
     private $notfound = <<<EOT
     <div>
-      <p style="padding-top:.33em"> 找不到和您的查询 "<em><{key}></em>" 相符的内容或信息。 </p>
+      <p style="padding-top:.33em"> 找不到和您的查询 "<em id="tle"><{key}></em>" 相符的内容或信息。 </p>
       <p style="margin-top:1em">建议：</p>
       <ul style="margin-left:1.3em;margin-bottom:2em">
         <li>请检查输入字词有无错误。</li>
@@ -177,20 +178,22 @@ EOT;
 EOT;
 
     private $rel_s = <<<EOT
-    <div style="border-top: 1px solid #e5e5e5;padding-bottom: 30px;"><h3 class="med" style="color:gray"><{key}>的相关搜索</h3>
+    <div style="border-top: 1px solid #e5e5e5;padding-bottom: 30px;"><h3 class="med" style="color:gray"><span id="rel"><{key}></rel>的相关搜索</h3>
 EOT;
     private $rel_r_s = '<div class="row">';
-    private $rel_tmp = "        <p class=\"_e4b\"><a href=\"<{href}>\"><{tle}></a></p>\n";
+    private $rel_tmp = "        <p class=\"_e4b\"><a href=\"<{href}>\" class=\"rel_a\"><{tle}></a></p>\n";
 
     private $have_hidden = FALSE;
     public $g = '';
     function __construct(search $Google_search = null){
-        $tle = opt('CON_ENC') ? encrypt('Google Alias Search', opt('CON_ENC_K')) : 'Google Alias Search';
-        $this->head = str_replace('<{encrypt}>', opt('ENCRYPT') ? opt('ENCRYPT_K') : 'FALSE', $this->head);
+        $tle = 'Google Alias Search';
+        $this->head = str_replace('<{encrypt}>', opt('ENCRYPT') ? opt('ENCRYPT_K') : 'FALSE',
+            str_replace('<{conencrypt}>', opt('CON_ENC') ? opt('CON_ENC_K') : 'FALSE', $this->head)
+        );
         if(@get_class($Google_search) == 'search'){
             $this->g = $Google_search;
             $this->is_start = str_replace('<{GET_Q}>', $GLOBALS['OPTIONS']['GET_Q'], $this->s_start);
-            $this->head = str_replace('<{title}>', $this->g->get_key().' - '.$tle, $this->head);
+            $this->head = str_replace('<{title}>', opt('CON_ENC') ? encrypt($this->g->get_key().' - '.$tle, opt('CON_ENC_K')) : $this->g->get_key().' - '.$tle, $this->head);
             $this->s_start = str_replace('<{GET_Q}>', $GLOBALS['OPTIONS']['GET_Q'], $this->s_start);
             $this->type = 1;
         }
@@ -239,7 +242,7 @@ EOT;
                 return FALSE;
             }
             echo $this->head;
-            echo str_replace('<{key}>', $this->g->get_key(),
+            echo str_replace('<{key}>', opt('CON_ENC') ? encrypt($this->g->get_key(), opt('CON_ENC_K')) : $this->g->get_key(),
                 str_replace('<{fill1}>', $s ,$this->s_start)
             );
             $this->show_tool_bar();

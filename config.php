@@ -33,8 +33,10 @@ $GLOBALS['OPTIONS'] = array(
 );
 $headers = array(
     CURLOPT_HTTPHEADER => array(    //http headers, 可以根据需求来修改
-        'user-agent:Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/37.0.2062.120 Safari/537.36',
-        'referer:https://www.google.com/'
+        'User-Agent:Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/38.0.2125.111 Safari/537.36',
+        'referer:https://www.google.com/',
+        'Host:www.google.com',
+
     ),
 //以下内容如无必要请不要修改
     CURLOPT_RETURNTRANSFER => TRUE,
