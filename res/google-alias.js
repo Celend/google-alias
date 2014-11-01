@@ -142,7 +142,8 @@ window.onload = function(s){
         var k = Number($('meta[name=conencrypt]').attr('content'));
         $('title').decrypt(k);
         $('.s-q').attr('value', decrypt($('.s-q').attr('value'), k));
-        $('#rel').decrypt(k);
+        if($('#rel').length > 0)
+            $('#rel').decrypt(k);
         var s = $('.s-title');
         for(var i = 0; i < s.length; ++i){
             $(s[i]).decrypt(k);

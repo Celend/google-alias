@@ -247,7 +247,7 @@ class search{
         if(count($r) > 0){
             $this->results['related'] = array();
             foreach($r as $v){
-                $this->results['related'][] = $this->e ? encrypt($v[1], $this->k) : '';
+                $this->results['related'][] = $v[1];
             }
         }
         else{
