@@ -9,11 +9,6 @@
 if(!defined('QUOTE'))
     exit('Access Denied!');
 
-if(function_exists('zlib_decode'))
-    define("HAVE_GZIP", TRUE);
-else
-    define("HAVE_GZIP", FALSE);
-
 $GLOBALS['OPTIONS'] = array(
     'SAFE_SEARCH' => FALSE,     //安全搜索
     'LANG'        => 'zh-CN',   //默认的搜索语言
@@ -45,9 +40,12 @@ $headers = array(
     CURLOPT_HEADER         => TRUE,
     CURLOPT_CONNECTTIMEOUT => $GLOBALS['OPTIONS']['TIMEOUT']        //set connect timeout
 );
+if(function_exists('zlib_decode'))
+    define("HAVE_GZIP", TRUE);
+else
+    define("HAVE_GZIP", FALSE);
 if(HAVE_GZIP && $GLOBALS['OPTIONS']['ENABLE_GZIP'])
     $headers[] = 'accept-encoding:gzip';
-
 
 
 //functions
