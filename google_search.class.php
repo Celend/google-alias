@@ -229,17 +229,17 @@ class search{
         for($i = 0; $i < count($s); $i++){
             $id_reg = '@<li[^>]+class="g"[^>]?(?:id="([^"]*)")?[^>]*>@s';
             preg_match($id_reg, $s[$i], $r);
-            $id = isset($r[1]) ? $this->e ? encrypt($r[1], $this->k) : '' : '';
+            $id = isset($r[1]) ? $this->e ? encrypt($r[1], $this->k) : $r[1] : '';
             $href_reg = '@<h3[^>]+class="r">.*?<a[^>]+href="([^"]*)"[^>]*>(.*?)</a>@s';
             preg_match($href_reg, $s[$i], $r);
-            $href = isset($r[1]) ? $this->e ? encrypt($r[1], $this->k) : '' : '';
-            $tle  = isset($r[2]) ? $this->e ? encrypt($r[2], $this->k) : '' : '';
+            $href = isset($r[1]) ? $this->e ? encrypt($r[1], $this->k) : $r[1] : '';
+            $tle  = isset($r[2]) ? $this->e ? encrypt($r[2], $this->k) : $r[2] : '';
             $disc_reg = '@<span[^>]+class="st"[^>]*>((?:<span[^>]+class="f">.*?</span>)?.*?)</span>@s';
             preg_match($disc_reg, $s[$i], $r);
-            $disc = isset($r[1]) ? $this->e ? encrypt($r[1], $this->k) : '' : '';
+            $disc = isset($r[1]) ? $this->e ? encrypt($r[1], $this->k) : $r[1] : '';
             $site_reg = '@<cite[^>]+class="_Rm[^"]*"[^>]*>(.*?)</cite>@s';
             preg_match($site_reg, $s[$i], $r);
-            $site = isset($r[1]) ? $this->e ? encrypt($r[1], $this->k) : '' : '';
+            $site = isset($r[1]) ? $this->e ? encrypt($r[1], $this->k) : $r[1] : '';
             $this->results[] = array('id' => $id, 'url' => $href, 'title' => $tle, 'info' => $disc, 'site' => $site);
         }
         //related searches
