@@ -45,7 +45,7 @@ if(function_exists('zlib_decode'))
 else
     define("HAVE_GZIP", FALSE);
 if(HAVE_GZIP && $GLOBALS['OPTIONS']['ENABLE_GZIP'])
-    $headers[] = 'accept-encoding:gzip';
+    $headers[CURLOPT_HTTPHEADER][] = 'accept-encoding:gzip';
 
 
 //functions
