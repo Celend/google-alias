@@ -204,6 +204,9 @@ a:visited {
     color: #1a0dab;
     font-size: .8em;
 }
+.nav-a:visited{
+    color: #1a0dab;
+}
 .s-prev{
     width: 74px;
     height: 55px;
@@ -389,7 +392,7 @@ a:visited {
     background: #f1f1f1;
 }
 .fbar{
-    bottom: 0;left: 0; right: 0;height: 40px;background: #F2F2F2;margin-top: 40px;border-top: 1px solid #E4E4E4;
+    bottom: 0;left: 0; right: 0;height: 40px;background: #F2F2F2;margin-top: 56px;border-top: 1px solid #E4E4E4;
 }
 .fa{
     display: inline-block;
