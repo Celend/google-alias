@@ -47,10 +47,10 @@ EOT;
   </div>
 </div>
   <div class="fbar" style="position: absolute">
-    <div class="fb">
+    <div class="fb" style="margin-left: 35px">
       <a class="fa" href="https://github.com/celend/google-alias">GitHub</a>
       <a class="fa" href="https://github.com/celend/google-alias/issues">反馈</a>
-      <a class="fa" href="mailto:forevertjt@gmail.com">联系我 forevertjt@gmail.com</a>
+      <a class="fa" style="float: right; margin-right: 35px" href="mailto:forevertjt@gmail.com">联系我 forevertjt@gmail.com</a>
     </div>
   </div>
 <div style="display: none"><script src="http://v1.cnzz.com/z_stat.php?id=1253514079&web_id=1253514079" language="JavaScript"></script></div>
