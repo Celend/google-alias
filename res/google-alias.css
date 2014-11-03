@@ -388,6 +388,22 @@ a:visited {
     border-radius: 2px ;
     background: #f1f1f1;
 }
+.fbar{
+    position: relative; bottom: 0; left: 0; right: 0;height: 40px;background: #F2F2F2;margin-top: 40px;border-top: 1px solid #E4E4E4;
+}
+.fa{
+    display: inline-block;
+    margin-right: 50px;
+}
+.fa:link, .fa:visited{
+    color: #777;
+}
+.fa:hover{
+    color: #444;
+}
+.fb{
+    line-height: 40px; margin-left: 145px;
+}
 @media screen and (max-width: 780px){
 	.s-logo {
 		display: block;
@@ -432,5 +448,8 @@ a:visited {
     }
     .tf{
         margin-left: 0; font-size: .9em; width: auto;
+    }
+    .fb{
+        margin-left: 15px;
     }
 }

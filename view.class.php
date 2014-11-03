@@ -46,6 +46,14 @@ EOT;
     </div>
   </div>
 </div>
+  <div class="fbar">
+    <div class="fb">
+      <a class="fa" href="https://github.com/celend/google-alias">GitHub</a>
+      <a class="fa" href="https://github.com/celend/google-alias/issues">反馈</a>
+      <a class="fa" href="mailto:forevertjt@gmail.com">联系我 forevertjt@gmail.com</a>
+    </div>
+  </div>
+<div style="display: none"><script src="http://v1.cnzz.com/z_stat.php?id=1253514079&web_id=1253514079" language="JavaScript"></script></div>
 </body>
 </html>
 EOT;
@@ -59,7 +67,7 @@ EOT;
     private $s_start = <<<EOT
 <body>
   <div class="s-top-bar">
-  <a href="./" style="text-">
+  <a href="./">
     <div class="s-logo">
       <img src="./res/logo11w.png" class="s-logo-img" />
       <div class="s-logo-alias">Alias</div>
@@ -80,6 +88,14 @@ EOT;
     private $s_end = <<<EOT
     </div>
   </div>
+  <div class="fbar">
+    <div class="fb">
+      <a class="fa" href="https://github.com/celend/google-alias">GitHub</a>
+      <a class="fa" href="https://github.com/celend/google-alias/issues">反馈</a>
+      <a class="fa" href="mailto:forevertjt@gmail.com">联系我 forevertjt@gmail.com</a>
+    </div>
+  </div>
+  <div style="display: none"><script src="http://v1.cnzz.com/z_stat.php?id=1253514079&web_id=1253514079" language="JavaScript"></script></div>
 </body>
 </html>
 EOT;
