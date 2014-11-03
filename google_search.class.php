@@ -6,6 +6,9 @@
  * @author celend
  * @date 14-10-27
  */
+if(!defined('QUOTE'))
+    exit('Access Denied!');
+
 class search{
     private $content = '';
     private $paras = array();

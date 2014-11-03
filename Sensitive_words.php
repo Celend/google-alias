@@ -1,4 +1,7 @@
 <?php
+if(!defined('QUOTE'))
+    exit('Access Denied!');
+
 $words = array (
 0 => '郭玉闪.*寻衅滋事',
 1 => '撑.*学生',

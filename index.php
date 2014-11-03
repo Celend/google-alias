@@ -10,6 +10,10 @@ define("QUOTE", TRUE);
 error_reporting(E_ALL);
 session_start();
 require_once 'config.php';
+if(!isset($_SESSION['ENC_K'])){
+    $_SESSION['ENC_K'] = rand(-10, 10);
+}
+$GLOBALS['OPTIONS']['ENCRYPT_K'] = $_SESSION['ENC_K'];
 if(!isset($_GET[opt('GET_Q')])){
     require_once 'view.class.php';
     $index = new view();

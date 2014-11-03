@@ -15,7 +15,6 @@ $GLOBALS['OPTIONS'] = array(
     'ENABLE_GZIP' => TRUE,      //gzip 压缩, 启用之后可节省近3分之一的流量, 前提是有gzip的模块, 否则开启也是无效的.
     'TIMEOUT'     => 3,         //连接超时, second
     'ENCRYPT'     => TRUE,     //是否开启URL参数加密
-    'ENCRYPT_K'   => 8,         //URL加密的密钥, 建议在正负10之内
     'CON_ENC'     => TRUE,     //是否开启网页内容加密
     'CON_ENC_K'   => 6,         //网页内容加密的秘钥
     'FORCE_ENC'   => FALSE,    //为真时始终加密网页, 为假时检测到敏感词才加密
