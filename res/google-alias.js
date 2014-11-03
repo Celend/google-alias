@@ -81,7 +81,12 @@ function encrypt(str, key){
 
 //extend
 $.fn.decrypt = function(key){
-    this.html(decrypt(this.html(), key));
+    try{
+        this.html(decrypt(this.html(), key));
+    }
+    catch(e){
+        console.log(e);
+    }
     return this;
 }
 var table = {'40':'@', '23':'#', '24':'$', '26':'&', '2F':'/', '3B':';', '3A':':', '3F':'?', '2C':',', '3D':'='};
@@ -100,8 +105,8 @@ function decrypt(str, key){
         }
         else{
             t = parseInt(parseInt(str.substr(i + 1, 2), 16) + key).toString(16).toLocaleUpperCase();
-            if(s.length == 1){
-                t = '0' + t;
+            if(t.length == 1){
+                s = '0' + t;
             }
             if(table[t] != undefined){
                 s += table[t];
@@ -116,7 +121,7 @@ function decrypt(str, key){
 };
 function commit(input){
     var temp = input.value;
-    if (temp == "")
+    if (temp == "" || temp.substr(0, 3).toLocaleUpperCase() == '%FF')
         return false;
     if($('meta[name=urlencrypt]').attr('content') == 'FALSE')
         return true;
