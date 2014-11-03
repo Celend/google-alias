@@ -46,7 +46,7 @@ EOT;
     </div>
   </div>
 </div>
-  <div class="fbar">
+  <div class="fbar" style="position: absolute">
     <div class="fb">
       <a class="fa" href="https://github.com/celend/google-alias">GitHub</a>
       <a class="fa" href="https://github.com/celend/google-alias/issues">反馈</a>
@@ -88,7 +88,7 @@ EOT;
     private $s_end = <<<EOT
     </div>
   </div>
-  <div class="fbar">
+  <div class="fbar" style="position: relative">
     <div class="fb">
       <a class="fa" href="https://github.com/celend/google-alias">GitHub</a>
       <a class="fa" href="https://github.com/celend/google-alias/issues">反馈</a>
