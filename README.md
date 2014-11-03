@@ -30,8 +30,8 @@ config.php 里面有许多个性化的设置, 比如自定义 GET 的键名, 默
 不保证可以正常使用, 建议备份原来的hosts
 
 ##可用服务##
-1. http://googlealias.tk 主站, 更新的内容会在这里测试
-2. http://tjt.hol.es  //同上, 不同域名而已, .tk解析不了的话就用这个
+1. http://googlealias.com
+2. http://tjt.hol.es
 3. http://tjt.pagebit.net
 4. http://tj.pagebit.net
 5. http://tjt.bugs3.com
