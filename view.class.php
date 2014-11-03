@@ -25,7 +25,7 @@ class view {
   <meta name="conencrypt" content="<{conencrypt}>" />
   <link rel="shortcut icon" type="image/x-icon" href="res/favicon.ico" />
   <link rel="stylesheet" type="text/css" href="res/google-alias.css" />
-  <script src=http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>
+  <script src="http://lib.sinaapp.com/js/jquery/2.0/jquery.min.js"></script>
   <script src="res/google-alias.js"></script>
 </head>
 EOT;
