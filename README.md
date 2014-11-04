@@ -31,9 +31,9 @@ config.php 里面有许多个性化的设置, 比如自定义 GET 的键名, 默
 
 ##可用服务##
 1. http://googlealias.com
-2. http://tjt.pagebit.net
-3. http://tj.pagebit.net
-4. http://tjt.bugs3.com
+2. http://googlealias.16mb.com
+3. http://tjt.pagebit.net
+4. http://tj.pagebit.net
 5. http://www-googlealias.rhcloud.com
-6. http://googlealias.16mb.com
+6. http://tjt.bugs3.com
 7. http://tjt.hol.es //不稳定
