@@ -17,7 +17,6 @@ $GLOBALS['OPTIONS'] = array(
     'ENCRYPT'     => TRUE,     //是否开启URL参数加密
     'CON_ENC'     => TRUE,     //是否开启网页内容加密
     'CON_ENC_K'   => 6,         //网页内容加密的秘钥
-    'FORCE_ENC'   => FALSE,    //为真时始终加密网页, 为假时检测到敏感词才加密
     'NUM'         => 10,        //默认的每页结果数
     'GET_LANG'    => 'hl',      //设置语言的get键名
     'GET_Q'       => 'qq',      //查询内容的get键名

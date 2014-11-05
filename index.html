@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Google Alias Search</title>
+  <meta name="description" content="Google Alias">
+  <meta name="keywords" content="Google Alias">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="urlencrypt" content="9"/>
+  <meta name="conencrypt" content="6"/>
+  <link rel="shortcut icon" type="image/x-icon" href="res/favicon.ico"/>
+  <link rel="stylesheet" type="text/css" href="res/google-alias.css?v1.0.1"/>
+  <script src="http://libs.baidu.com/jquery/1.10.1/jquery.min.js"></script>
+  <script src="res/google-alias.js?v1.0.3"></script>
+</head>
+<body onload="index()">
+<div class="i-search">
+  <div class="i-logo">
+    <div class="i-logo-img"></div>
+    <span class="alias">Alias</span>
+  </div>
+  <div class="i-keywork">
+    <div class="i-search-bar">
+      <div style="margin: 0 auto 0 auto; width: 50%">
+        <form action="./" method="get" onsubmit="return commit1()" target="_blank">
+          <input type="text" class="i-q" autocomplete="off"/>
+          <input type="hidden" value="" name="qq" id="hdq"/>
+          <div class="button-bar" style="margin: 20px auto 0 auto; width: auto;">
+            <button type="submit" class="i-search-bu" onclick="searchtype = 0">正在获取IP</button>
+            <button type="submit" class="i-search-bu" onclick="searchtype = 1">敏感词搜索</button>
+          </div>
+        </form>
+    </div>
+    </div>
+  </div>
+</div>
+<div class="fbar" style="position: absolute">
+  <div class="fb" style="margin-left: 35px">
+    <a class="fa" href="https://github.com/celend/google-alias">GitHub</a>
+    <a class="fa" href="https://github.com/celend/google-alias/issues">反馈</a>
+    <a class="fa" href="#" onclick="index(ip_k + 1)">更换IP</a>
+    <a class="fa" style="float: right; margin-right: 35px" href="mailto:forevertjt@gmail.com">联系我
+      forevertjt@gmail.com</a>
+  </div>
+</div>
+<div style="display: none">
+  <script src="http://v1.cnzz.com/z_stat.php?id=1253514079&web_id=1253514079" language="JavaScript"></script>
+</div>
+</body>
+</html>

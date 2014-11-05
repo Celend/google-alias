@@ -44,7 +44,7 @@ body {
 }
 
 .i-q {
-	width: 40%;
+	width: 100%;
 	height: 29px;
 	padding: 4px 6px 2px 4px;
 	border: 1px solid #b9b9b9;
@@ -52,7 +52,7 @@ body {
 	box-sizing: border-box;
 	font-size: 17px;
 	min-width: 230px;
-	max-width: 500px;
+	max-width: 600px;
 }
 
 .i-q:hover {
@@ -64,15 +64,16 @@ body {
 }
 
 .i-search-bu {
-	background: url("./search.png") no-repeat center center;
-	margin-left: 10px;
 	border: none;
+    font-family: "Microsoft YaHei", "微软雅黑";
 	border-radius: 2px;
 	background-color: #4d90fe;
+    font-size: 1.05em;
+    padding: .2em 1.1em 1.5em 1.1em;
+    margin: 0 15px 0 15px;
+    color: #FFF;
 	height: 27px;
-	width: 60px;
-	display: inline-block;
-	vertical-align: top;
+	cursor: pointer;
 }
 
 

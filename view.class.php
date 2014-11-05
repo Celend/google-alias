@@ -24,13 +24,13 @@ class view {
   <meta name="urlencrypt" content="<{encrypt}>" />
   <meta name="conencrypt" content="<{conencrypt}>" />
   <link rel="shortcut icon" type="image/x-icon" href="res/favicon.ico" />
-  <link rel="stylesheet" type="text/css" href="res/google-alias.css?v1.0.1" />
+  <link rel="stylesheet" type="text/css" href="res/google-alias.css?v1.0.4" />
   <script src="http://libs.baidu.com/jquery/1.10.1/jquery.min.js"></script>
-  <script src="res/google-alias.js?v1.0.3"></script>
+  <script src="res/google-alias.js?v1.0.6"></script>
 </head>
 EOT;
     private $index_body = <<<EOT
-<body>
+<body onload="index()">
 <div class="i-search">
   <div class="i-logo">
     <div class="i-logo-img"></div>
@@ -38,12 +38,16 @@ EOT;
   </div>
   <div class="i-keywork">
     <div class="i-search-bar">
-      <form action="./" method="get" onsubmit="return commit(document.getElementsByClassName('i-q')[0])">
-        <input type="text" class="i-q" autocomplete="off" />
-        <input type="hidden" value="" name="<{GET_Q}>" id="hdq"/>
-        <button type="submit" class="i-search-bu">
-        </button>
-      </form>
+      <div style="margin: 0 auto 0 auto; width: 50%">
+        <form action="./" method="get" onsubmit="return commit1()">
+          <input type="text" class="i-q" autocomplete="off"/>
+          <input type="hidden" value="" name="qq" id="hdq"/>
+          <div class="button-bar" style="margin: 20px auto 0 auto; width: auto;">
+            <button type="submit" class="i-search-bu" onclick="searchtype = 0">正在获取IP</button>
+            <button type="submit" class="i-search-bu" onclick="searchtype = 1">敏感词搜索</button>
+          </div>
+        </form>
+    </div>
     </div>
   </div>
 </div>
@@ -51,6 +55,7 @@ EOT;
     <div class="fb" style="margin-left: 35px">
       <a class="fa" href="https://github.com/celend/google-alias">GitHub</a>
       <a class="fa" href="https://github.com/celend/google-alias/issues">反馈</a>
+      <a class="fa" href="#" onclick="index(ip_k + 1)">更换谷歌IP</a>
       <a class="fa" style="float: right; margin-right: 35px" href="mailto:forevertjt@gmail.com">联系我 forevertjt@gmail.com</a>
     </div>
   </div>
@@ -66,7 +71,7 @@ EOT;
     </li>
 EOT;
     private $s_start = <<<EOT
-<body>
+<body onload="search()">
   <div class="s-top-bar">
   <a href="./">
     <div class="s-logo">
