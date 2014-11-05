@@ -135,7 +135,7 @@ window.onload = function(s){
     if($('meta[name=conencrypt]').attr('content') != 'FALSE' && $('.s-q').length > 0){
         var k = Number($('meta[name=conencrypt]').attr('content'));
         $('title').decrypt(k);
-        $('.s-q').attr('value', decrypt($('.s-q').attr('value'), k));
+        $('.s-q').attr('value', decrypt($('.s-q').attr('value-t'), k));
         if($('#rel').length > 0)
             $('#rel').decrypt(k);
         var s = $('.s-title');
@@ -155,6 +155,12 @@ window.onload = function(s){
         for(i = 0; i < s.length; ++i){
             $(s[i]).decrypt(k);
         }
+        $('.loading-mes').fadeOut(100, function(){
+            $('.loading-mes').remove();
+            $('.cont').fadeIn(300, function(){
+                $('.search-res').removeClass('loading');
+            });
+        });
     }
     if($('.i-q').length > 0)
         $('.i-q').focus();

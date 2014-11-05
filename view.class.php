@@ -24,9 +24,9 @@ class view {
   <meta name="urlencrypt" content="<{encrypt}>" />
   <meta name="conencrypt" content="<{conencrypt}>" />
   <link rel="shortcut icon" type="image/x-icon" href="res/favicon.ico" />
-  <link rel="stylesheet" type="text/css" href="res/google-alias.css" />
+  <link rel="stylesheet" type="text/css" href="res/google-alias.css?v1.0.1" />
   <script src="http://libs.baidu.com/jquery/1.10.1/jquery.min.js"></script>
-  <script src="res/google-alias.js?v1.0.1"></script>
+  <script src="res/google-alias.js?v1.0.3"></script>
 </head>
 EOT;
     private $index_body = <<<EOT
@@ -76,7 +76,7 @@ EOT;
   </a>
     <div class="s-search-bar">
       <form action="./" method="get" onsubmit="return commit(document.getElementsByClassName('s-q')[0])">
-        <input type="text" value="<{key}>" class="s-q" autocomplete="off" />
+        <input type="text" value-t="<{key}>" class="s-q" autocomplete="off" />
         <input type="hidden" value="" name="<{GET_Q}>" id="hdq"/>
         <{fill1}>
         <button type="submit" class="i-search-bu"></button>
@@ -119,39 +119,42 @@ EOT;
           <{status}>
         </div>
         <div id="tool-panel">
-          <ui>
+          <ul>
             <li class="no-sel tool tool-time" id="time">时间限制<span class="dwn-tri">&#9660;</span></li>
             <li class="no-sel tool" id="num">每页结果数<span class="dwn-tri">&#9660;</span></li>
             <li class="no-sel tool" id="lang">语言<span class="dwn-tri">&#9660;</span></li>
             <{fill3}>
-          </ui>
+          </ul>
         </div>
       </div>
       <div class="tool-al" id="tool-time" style="display: none;left:165px;">
-        <ui style="list-style: none;">
+        <ul style="list-style: none;">
           <{fill1}>
-        </ui>
+        </ul>
       </div>
       <div class="tool-al" id="tool-num" style="display: none;left: 272px;">
-        <ui style="list-style: none;">
+        <ul style="list-style: none;">
           <{fill2}>
-        </ui>
+        </ul>
       </div>
       <div class="tool-al" id="tool-lang" style="display: none;left: 375px;">
-        <ui style="list-style: none;">
+        <ul style="list-style: none;">
           <{fill4}>
-        </ui>
+        </ul>
       </div>
     </div>
     <div class="tool-btn no-sel tool-btn-b">搜索工具</div>
 EOT;
     private $toobar_e = <<<EOT
   </div>
-  <div class="search-res">
-    <div style="border-bottom: 1px #e5e5e5 solid;">
+  <div class="search-res <{load}>">
+    <{loadmes}>
+    <div style="border-bottom: 1px #e5e5e5 solid;" class="cont">
+    <ul>
 EOT;
     private $toobar_status = '找到约 <{num}> 条结果, 用时 <{second}> 秒.';
     private $page_G = <<<EOT
+    </ul>
   </div>
     <div class="navcnt">
       <table class="nav-t">
@@ -196,7 +199,7 @@ EOT;
 EOT;
 
     private $rel_s = <<<EOT
-    <div style="border-top: 1px solid #e5e5e5;padding-bottom: 30px;"><h3 class="med" style="color:gray"><span id="rel"><{key}></rel>的相关搜索</h3>
+    <div style="border-top: 1px solid #e5e5e5;padding-bottom: 30px;"><h3 class="med" style="color:gray"><span id="rel"><{key}></rel>的相关搜索</span></h3>
 EOT;
     private $rel_r_s = '<div class="row">';
     private $rel_tmp = "        <p class=\"_e4b\"><a href=\"<{href}>\" class=\"rel_a\"><{tle}></a></p>\n";
@@ -214,6 +217,18 @@ EOT;
             $this->head = str_replace('<{title}>', opt('CON_ENC') ? encrypt($this->g->get_key().' - '.$tle, opt('CON_ENC_K')) : $this->g->get_key().' - '.$tle, $this->head);
             $this->s_start = str_replace('<{GET_Q}>', $GLOBALS['OPTIONS']['GET_Q'], $this->s_start);
             $this->type = 1;
+            if(opt('CON_ENC')){
+                $this->toobar_e = str_replace('<{load}>', 'loading',
+                    str_replace('<{loadmes}>', '<div class="loading-mes">search results is loading...</div>',
+                        $this->toobar_e)
+                );
+            }
+            else{
+                $this->toobar_e = str_replace('<{load}>', '',
+                    str_replace('<{loadmes}>', '',
+                        $this->toobar_e)
+                );
+            }
         }
         else{
             $this->type = 0;
