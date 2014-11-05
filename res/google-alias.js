@@ -121,11 +121,13 @@ function decrypt(str, key){
 };
 function commit(input){
     var temp = input.value;
-    if (temp == "" || temp.substr(0, 3).toLocaleUpperCase() == '%FF')
+    var hdq = $('#hdq');
+    if (temp == "" || hdq.attr('value').substr(0, 3).toLocaleUpperCase() == '%FF')
         return false;
+    hdq.attr('value', temp);
     if($('meta[name=urlencrypt]').attr('content') == 'FALSE')
         return true;
-    input.value = encrypt(temp, parseInt($('meta[name=urlencrypt]').attr('content'), 10));
+    hdq.attr('value', encrypt(temp, parseInt($('meta[name=urlencrypt]').attr('content'), 10)));
     return true;
 }
 window.onload = function(s){
