@@ -208,6 +208,12 @@ function commit1(){
     }
     return true;
 }
+function commit2(){
+    if($('.s-q')[0].value == '')
+        return false;
+    $('#hdq').attr('value', encrypt($('.s-q')[0].value, Number($('meta[name=urlencrypt]').attr('content'))));
+    return true;
+}
 function search(s){
     var k = Number($('meta[name=conencrypt]').attr('content'));
     $('.s-q').attr('value', decrypt($('.s-q').attr('value-t'), k));

@@ -75,7 +75,17 @@ body {
 	height: 27px;
 	cursor: pointer;
 }
-
+.s-search-bu{
+    background: url("./search.png") no-repeat center center;
+    margin-left: 10px;
+    border: none;
+    border-radius: 2px;
+    background-color: #4d90fe;
+    height: 27px;
+    width: 60px;
+    display: inline-block;
+    vertical-align: top;
+}
 
 /*result page*/
 .s-logo {
