@@ -124,9 +124,10 @@ function commit(input){
     var hdq = $('#hdq');
     if (temp == "" || hdq.attr('value').substr(0, 3).toLocaleUpperCase() == '%FF')
         return false;
-    hdq.attr('value', temp);
-    if($('meta[name=urlencrypt]').attr('content') == 'FALSE')
+    if($('meta[name=urlencrypt]').attr('content') == 'FALSE'){
+        hdq.attr('value', temp);
         return true;
+    }
     hdq.attr('value', encrypt(temp, parseInt($('meta[name=urlencrypt]').attr('content'), 10)));
     return true;
 }
