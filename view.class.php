@@ -26,7 +26,7 @@ class view {
   <link rel="shortcut icon" type="image/x-icon" href="res/favicon.ico" />
   <link rel="stylesheet" type="text/css" href="res/google-alias.css" />
   <script src="http://libs.baidu.com/jquery/1.10.1/jquery.min.js"></script>
-  <script src="res/google-alias.js"></script>
+  <script src="res/google-alias.js?v1.0.1"></script>
 </head>
 EOT;
     private $index_body = <<<EOT
