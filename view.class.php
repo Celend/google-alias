@@ -24,9 +24,9 @@ class view {
   <meta name="urlencrypt" content="<{encrypt}>" />
   <meta name="conencrypt" content="<{conencrypt}>" />
   <link rel="shortcut icon" type="image/x-icon" href="res/favicon.ico" />
-  <link rel="stylesheet" type="text/css" href="res/google-alias.css?v1.0.4" />
+  <link rel="stylesheet" type="text/css" href="res/google-alias.css?v1.0.5" />
   <script src="http://libs.baidu.com/jquery/1.10.1/jquery.min.js"></script>
-  <script src="res/google-alias.js?v1.0.6"></script>
+  <script src="res/google-alias.js?v1.0.7"></script>
 </head>
 EOT;
     private $index_body = <<<EOT
@@ -80,11 +80,11 @@ EOT;
     </div>
   </a>
     <div class="s-search-bar">
-      <form action="./" method="get" onsubmit="return commit(document.getElementsByClassName('s-q')[0])">
+      <form action="./" method="get" onsubmit="return commit2()">
         <input type="text" value-t="<{key}>" class="s-q" autocomplete="off" />
         <input type="hidden" value="" name="<{GET_Q}>" id="hdq"/>
         <{fill1}>
-        <button type="submit" class="i-search-bu"></button>
+        <button type="submit" class="s-search-bu"></button>
       </form>
     </div>
   </div>
