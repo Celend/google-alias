@@ -24,7 +24,7 @@ class view {
   <meta name="urlencrypt" content="<{encrypt}>" />
   <meta name="conencrypt" content="<{conencrypt}>" />
   <link rel="shortcut icon" type="image/x-icon" href="res/favicon.ico" />
-  <link rel="stylesheet" type="text/css" href="res/google-alias.css?v1.0.5" />
+  <link rel="stylesheet" type="text/css" href="res/google-alias.css?v1.0.6" />
   <script src="http://libs.baidu.com/jquery/1.10.1/jquery.min.js"></script>
   <script src="res/google-alias.js?v1.0.7"></script>
 </head>
@@ -38,7 +38,7 @@ EOT;
   </div>
   <div class="i-keywork">
     <div class="i-search-bar">
-      <div style="margin: 0 auto 0 auto; width: 50%">
+      <div class="i-box">
         <form action="./" method="get" onsubmit="return commit1()">
           <input type="text" class="i-q" autocomplete="off"/>
           <input type="hidden" value="" name="qq" id="hdq"/>
@@ -56,7 +56,7 @@ EOT;
       <a class="fa" href="https://github.com/celend/google-alias">GitHub</a>
       <a class="fa" href="https://github.com/celend/google-alias/issues">反馈</a>
       <a class="fa" href="#" onclick="index(ip_k + 1)">更换谷歌IP</a>
-      <a class="fa" style="float: right; margin-right: 35px" href="mailto:forevertjt@gmail.com">联系我 forevertjt@gmail.com</a>
+      <a class="fa contactme" style="float: right; margin-right: 35px" href="mailto:forevertjt@gmail.com">联系我 forevertjt@gmail.com</a>
     </div>
   </div>
 <div style="display: none"><script src="http://v1.cnzz.com/z_stat.php?id=1253514079&web_id=1253514079" language="JavaScript"></script></div>
@@ -132,17 +132,17 @@ EOT;
           </ul>
         </div>
       </div>
-      <div class="tool-al" id="tool-time" style="display: none;left:165px;">
+      <div class="tool-al" id="tool-time">
         <ul style="list-style: none;">
           <{fill1}>
         </ul>
       </div>
-      <div class="tool-al" id="tool-num" style="display: none;left: 272px;">
+      <div class="tool-al" id="tool-num">
         <ul style="list-style: none;">
           <{fill2}>
         </ul>
       </div>
-      <div class="tool-al" id="tool-lang" style="display: none;left: 375px;">
+      <div class="tool-al" id="tool-lang">
         <ul style="list-style: none;">
           <{fill4}>
         </ul>

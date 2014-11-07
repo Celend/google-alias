@@ -428,9 +428,21 @@ a:visited {
 .loading-mes{
     font-size: 2em;text-align: center; color: #CCC; line-height: 16em; height: 100%;
 }
+.i-box{
+    margin: 0 auto 0 auto; width: 50%
+}
 ul{
     margin: 0;
     padding: 0;
+}
+#tool-time{
+    display: none;left:165px;
+}
+#tool-num{
+    display: none;left: 272px;
+}
+#tool-lang{
+    display: none;left: 375px;
 }
 @media screen and (max-width: 780px){
 	.s-logo {
@@ -450,7 +462,6 @@ ul{
 	.s-search-bar {
 		width: 95%;
 		margin: 0;
-		margin-bottom: 10px;
 	}
 
 	.s-q {
@@ -459,7 +470,7 @@ ul{
 	}
 
 	.search-res {
-		width: 85%;
+		width: 90%;
 		margin: 0 auto;
 		max-width: 580px;
 	}
@@ -472,12 +483,45 @@ ul{
         height: 55px
     }
     .nav-t{
-        margin: 25px auto 0 -14px;
+        margin: 25px auto 0 auto;
+        width: 90%;
     }
     .tf{
-        margin-left: 0; font-size: .9em; width: auto;
+        margin-left: 5%; font-size: .9em; width: auto;
+    }
+    #tool-time{
+        left: 35px;
+    }
+    #tool-num{
+        left: 135px;
+    }
+    #tool-lang{
+        left: 225px;
     }
     .fb{
         margin-left: 15px;
+    }
+    .contactme{
+        display: none;
+    }
+    .i-q{
+        widows: 10;
+    }
+    .i-box{
+        width:90%
+    }
+    .fa{
+        margin: 0 5px 0 5px;
+    }
+    .i-search-bu{
+        margin: 0 6px 0 6px;
+        padding: .3em .9em 1.5em .9em;
+        font-size: .95em;
+    }
+    #tool-panel{
+        margin-top: 12px;
+    }
+    .search-info{
+        line-height: 3.1em;
     }
 }
