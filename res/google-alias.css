@@ -444,6 +444,9 @@ ul{
 #tool-lang{
     display: none;left: 375px;
 }
+.button-bar{
+    margin: 20px auto 0 auto; width: auto;
+}
 @media screen and (max-width: 780px){
 	.s-logo {
 		display: block;
@@ -523,5 +526,27 @@ ul{
     }
     .search-info{
         line-height: 3.1em;
+    }
+}
+@media screen and (max-height: 350px){
+    .i-search{
+        margin-top: 4%;
+    }
+    .i-search-bar{
+        margin: 0 0 0 0;
+    }
+    .i-q{
+        display: inline-block;
+        width: auto;
+        min-width: 50%;
+        max-width: 300px;
+        margin: 0;
+    }
+    .button-bar{
+        display: inline-block;
+        margin-top: 10px;
+    }
+    .i-search-bu{
+        margin: 0 3px 0 3px;
     }
 }

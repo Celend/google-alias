@@ -130,8 +130,12 @@ function index(modify){
         return true;
     }
     if(modify){
-        console.log(modify);
+        if(ips.length <= 1){
+            $('.fa:eq(2)').html('暂无可用IP');
+            return false;
+        }
         ips.splice(0, modify);
+        ip_k = 0;
     }
     else{
         $('.i-q').focus();
@@ -140,6 +144,7 @@ function index(modify){
     function testip(state, callback){
         if(state){
             avaip = ips[ip_k];
+            console.info('now google ip is:' + avaip);
             if(callback)
             callback();
             return true;
@@ -175,7 +180,15 @@ function index(modify){
         }
     }
     if(modify){
-        ping();
+        ping(function(){
+            $('.i-q').stop().animate({
+                'backgroundColor': '#F00'
+            }, 50, function(){
+                $(this).animate({
+                    'backgroundColor': '#FFF'
+                }, 1000);
+            });
+        });
     }
     else{
         $.ajax({
@@ -200,7 +213,7 @@ function commit1(){
         if(avaip == ''){
             return false;
         }
-        window.open('http://' + avaip + '/#newwindow=1&q=' + encodeURI($('.i-q')[0].value), '_blank');
+        window.open('http://' + avaip + '/search?newwindow=1&q=' + encodeURI($('.i-q')[0].value), '_blank');
         return false;
     }
     else if(searchtype === 1){

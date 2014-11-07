@@ -20,13 +20,13 @@ class view {
   <title><{title}></title>
   <meta name="description" content="Google Alias">
   <meta name="keywords" content="Google Alias">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
   <meta name="urlencrypt" content="<{encrypt}>" />
   <meta name="conencrypt" content="<{conencrypt}>" />
   <link rel="shortcut icon" type="image/x-icon" href="res/favicon.ico" />
-  <link rel="stylesheet" type="text/css" href="res/google-alias.css?v1.0.6" />
+  <link rel="stylesheet" type="text/css" href="res/google-alias.css?v1.0.7" />
   <script src="http://libs.baidu.com/jquery/1.10.1/jquery.min.js"></script>
-  <script src="res/google-alias.js?v1.0.7"></script>
+  <script src="res/google-alias.js?v1.0.9"></script>
 </head>
 EOT;
     private $index_body = <<<EOT
@@ -42,7 +42,7 @@ EOT;
         <form action="./" method="get" onsubmit="return commit1()">
           <input type="text" class="i-q" autocomplete="off"/>
           <input type="hidden" value="" name="qq" id="hdq"/>
-          <div class="button-bar" style="margin: 20px auto 0 auto; width: auto;">
+          <div class="button-bar">
             <button type="submit" class="i-search-bu" onclick="searchtype = 0">正在获取IP</button>
             <button type="submit" class="i-search-bu" onclick="searchtype = 1">敏感词搜索</button>
           </div>
