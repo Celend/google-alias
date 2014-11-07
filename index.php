@@ -29,17 +29,6 @@ else{
     $n = isset($_GET[opt('GET_NUM')]) ? (int) $_GET[opt('GET_NUM')] : FALSE;
     if(substr($q, 0, 3) == '%FF' && opt('ENCRYPT'))
         $q = decrypt($q, opt('ENCRYPT_K'));
-    if(!opt('FORCE_ENC') && opt('CON_ENC')){
-        require_once 'Sensitive_words.php';
-        $GLOBALS['OPTIONS']['CON_ENC'] = FALSE;
-        foreach($words as $w){
-            preg_match('/'.$w.'/i', $q, $r);
-            if(count($r) > 0){
-                $GLOBALS['OPTIONS']['CON_ENC'] = TRUE;
-                break;
-            }
-        }
-    }
     $g = new search($q);
     if($n)
         $g->set_num($n);
@@ -47,9 +36,8 @@ else{
         $g->set_page($p);
     if($d)
         $g->set_time($d);
-    if($h){
+    if($h)
         $g->set_lang($h);
-    }
     $g->load();
     $g->get_results();
     $s = new view($g);
