@@ -301,7 +301,7 @@ class search{
         if(isset($this->paras_m[opt('GET_TIME')]))
             $paras[opt('GET_TIME')] = $this->paras_m[opt('GET_TIME')];
         $paras[opt('GET_Q')] = $key;
-        return $this->get_url($paras);
+        return './?'.$this->arr2url($paras);
     }
     public function get_commit_paras(){
         $paras = array();
