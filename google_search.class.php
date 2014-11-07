@@ -300,7 +300,7 @@ class search{
             $paras[opt('GET_LANG')] = $this->paras_m[opt('GET_LANG')];
         if(isset($this->paras_m[opt('GET_TIME')]))
             $paras[opt('GET_TIME')] = $this->paras_m[opt('GET_TIME')];
-        $paras[opt('GET_Q')] = $key;
+        $paras[opt('GET_Q')] = $this->e ? encrypt($key, $this->k) : $key;
         return './?'.$this->arr2url($paras);
     }
     public function get_commit_paras(){
