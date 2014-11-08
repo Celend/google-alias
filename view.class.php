@@ -18,8 +18,8 @@ class view {
 <head>
   <meta charset="utf-8">
   <title><{title}></title>
-  <meta name="description" content="Google Alias">
-  <meta name="keywords" content="Google Alias">
+  <meta name="description" content="Google Alias Search, 帮助无法访问谷歌的人们使用谷歌搜索, 获取更好的知识, 发现更真实的世界.">
+  <meta name="keywords" content="Google Alias 谷歌 搜索 敏感词搜索">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
   <meta name="urlencrypt" content="<{encrypt}>" />
   <meta name="conencrypt" content="<{conencrypt}>" />
