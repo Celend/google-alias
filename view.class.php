@@ -12,8 +12,7 @@ if(!defined('QUOTE')){
 class view {
 
     private $type = 0;
-    private $head = <<<EOT
-<!DOCTYPE html>
+    private $head = '<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -27,10 +26,8 @@ class view {
   <link rel="stylesheet" type="text/css" href="res/google-alias.css?v1.0.7" />
   <script src="http://libs.baidu.com/jquery/1.10.1/jquery.min.js"></script>
   <script src="res/google-alias.js?v1.0.9"></script>
-</head>
-EOT;
-    private $index_body = <<<EOT
-<body onload="index()">
+</head>';
+    private $index_body = '<body onload="index()">
 <div class="i-search">
   <div class="i-logo">
     <div class="i-logo-img"></div>
@@ -61,17 +58,13 @@ EOT;
   </div>
 <div style="display: none"><script src="http://v1.cnzz.com/z_stat.php?id=1253514079&web_id=1253514079" language="JavaScript"></script></div>
 </body>
-</html>
-EOT;
-    private $res_tmp = <<<EOT
-    <li class="s-box">
+</html>';
+    private $res_tmp = '    <li class="s-box">
      <a class="s-title" href="<{href}>"  target="_blank"><{tle}></a>
      <span class="s-title-link"><{site}></span>
      <span class="s-disc"><{disc}></span>
-    </li>
-EOT;
-    private $s_start = <<<EOT
-<body onload="search()">
+    </li>';
+    private $s_start = '<body onload="search()">
   <div class="s-top-bar">
   <a href="./">
     <div class="s-logo">
@@ -88,12 +81,10 @@ EOT;
       </form>
     </div>
   </div>
-  <div class="search-tool-bar">
-EOT;
+  <div class="search-tool-bar">';
     private $reset = '<li class="no-sel tool-btn-b" id="clear">重置</li>';
     private $hidden_field = '<input class="hd-fd" type="hidden" name="<{name}>" value="<{value}>" />';
-    private $s_end = <<<EOT
-    </div>
+    private $s_end = '    </div>
   </div>
   <div class="fbar" style="position: relative">
     <div class="fb">
@@ -104,10 +95,8 @@ EOT;
   </div>
   <div style="display: none"><script src="http://v1.cnzz.com/z_stat.php?id=1253514079&web_id=1253514079" language="JavaScript"></script></div>
 </body>
-</html>
-EOT;
-    private $notfound = <<<EOT
-    <div>
+</html>';
+    private $notfound = '    <div>
       <p style="padding-top:.33em"> 找不到和您的查询 "<em id="tle"><{key}></em>" 相符的内容或信息。 </p>
       <p style="margin-top:1em">建议：</p>
       <ul style="margin-left:1.3em;margin-bottom:2em">
@@ -115,10 +104,8 @@ EOT;
         <li>请尝试其他的查询词</li>
         <li>请改用较常见的字词。</li>
       </ul>
-    </div>
-EOT;
-    private $toobar_s = <<<EOT
-    <div class="tf">
+    </div>';
+    private $toobar_s = '    <div class="tf">
       <div style="height: 39px;; overflow: hidden;">
         <div class="search-info" id="search-info">
           <{status}>
@@ -148,18 +135,14 @@ EOT;
         </ul>
       </div>
     </div>
-    <div class="tool-btn no-sel tool-btn-b">搜索工具</div>
-EOT;
-    private $toobar_e = <<<EOT
-  </div>
+    <div class="tool-btn no-sel tool-btn-b">搜索工具</div>';
+    private $toobar_e = '  </div>
   <div class="search-res <{load}>">
     <{loadmes}>
     <div style="border-bottom: 1px #e5e5e5 solid;" class="cont">
-    <ul>
-EOT;
+    <ul>';
     private $toobar_status = '找到约 <{num}> 条结果, 用时 <{second}> 秒.';
-    private $page_G = <<<EOT
-    </ul>
+    private $page_G = '    </ul>
   </div>
     <div class="navcnt">
       <table class="nav-t">
@@ -170,27 +153,21 @@ EOT;
                 <span class="csb c-g"></span>
                 <{page_p}>
               </a>
-            </td>
-EOT;
+            </td>';
     private $page_p = '<span class="t-prev">上一页</span>';
-    private $page_o1 = <<<EOT
-            <td>
+    private $page_o1 = '            <td>
               <a class="nav-a">
                 <span class="csb c-o1"></span>
                 <span class="nav-n"><{num}></span>
               </a>
-            </td>
-EOT;
-    private $page_o2 = <<<EOT
-            <td>
+            </td>';
+    private $page_o2 = '            <td>
               <a <{href}> class="nav-a">
                 <span class="csb c-o2"></span>
                 <span class="nav-n"><{num}></span>
               </a>
-            </td>
-EOT;
-    private $page_g = <<<EOT
-            <td>
+            </td>';
+    private $page_g = '            <td>
               <a <{href}> class="nav-a s-next">
                 <span class="csb c-gle"></span>
                 <span class="t-next">下一页</span>
@@ -199,13 +176,9 @@ EOT;
           </tr>
         </tbody>
       </table>
-    </div>
+    </div>';
 
-EOT;
-
-    private $rel_s = <<<EOT
-    <div style="border-top: 1px solid #e5e5e5;padding-bottom: 30px;"><h3 class="med" style="color:gray"><span id="rel"><{key}></rel>的相关搜索</span></h3>
-EOT;
+    private $rel_s = '    <div style="border-top: 1px solid #e5e5e5;padding-bottom: 30px;"><h3 class="med" style="color:gray"><span id="rel"><{key}></rel>的相关搜索</span></h3>';
     private $rel_r_s = '<div class="row">';
     private $rel_tmp = "        <p class=\"_e4b\"><a href=\"<{href}>\" class=\"rel_a\"><{tle}></a></p>\n";
 
