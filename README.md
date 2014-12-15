@@ -25,10 +25,6 @@ config.php 里面有许多个性化的设置, 比如自定义 GET 的键名, 默
 2. 你找找看
 
 
-##hosts##
-附送hosts, 可以上facebook, google, twitter, dropbox, wikiPedia等, hosts内有说明更新日期.
-不保证可以正常使用, 建议备份原来的hosts
-
 ##可用服务##
 1. http://googlealias.com
 2. http://googlealias.890m.com
