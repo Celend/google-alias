@@ -25,7 +25,7 @@ class view {
   <link rel="shortcut icon" type="image/x-icon" href="res/favicon.ico" />
   <link rel="stylesheet" type="text/css" href="res/google-alias.css?v1.0.7" />
   <script src="http://libs.baidu.com/jquery/1.10.1/jquery.min.js"></script>
-  <script src="res/google-alias.js?v1.0.9"></script>
+  <script src="res/google-alias.js?v1.1"></script>
 </head>';
     private $index_body = '<body onload="index()">
 <div class="i-search">
@@ -53,6 +53,8 @@ class view {
       <a class="fa" href="https://github.com/celend/google-alias">GitHub</a>
       <a class="fa" href="https://github.com/celend/google-alias/issues">反馈</a>
       <a class="fa" href="#" onclick="index(ip_k + 1)">更换谷歌IP</a>
+      <a class="fa" href="http://t55y.com" target="_blank">t55y.com</a>
+      <a class="fa" href="http://googlealias.tk" target="_blank">googlealias.tk</a>
       <a class="fa contactme" style="float: right; margin-right: 35px" href="mailto:forevertjt@gmail.com">联系我 forevertjt@gmail.com</a>
     </div>
   </div>

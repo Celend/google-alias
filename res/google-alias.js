@@ -196,6 +196,7 @@ function index(modify){
             'url': './google_avaiable_ip.txt',
             'success': function(d){
                 ips = d.split('|');
+                ips.sort(function(){ return 0.5 - Math.random() });
                 ping(function(){
                     $('.i-search-bu')[0].innerHTML = 'Google搜索';
                 });
