@@ -216,21 +216,21 @@ class search{
         $c = 0;
         $s = array();
         while(TRUE){
-            $s1 = stripos($this->content, '<li class="g"', $c);
-            $s2 = stripos($this->content, '<li class="g"', $s1 + 15);
+            $s1 = stripos($this->content, '<div class="g"', $c);
+            $s2 = stripos($this->content, '<div class="g"', $s1 + 15);
             if(!$s2){
                 $e = substr($this->content, $s1);
-                $s3 = strripos($e, '</li>') + 5;
+                $s3 = strripos($e, '</div>') + 5;
                 $s[] = substr($this->content, $s1, $s3);
                 break;
             }
             $e  = substr($this->content, $s1, $s2);
-            $s3 = strripos($e, '</li>') + 5;
+            $s3 = strripos($e, '</div>') + 5;
             $s[] = substr($this->content, $s1, $s3);
             $c = $s2;
         }
         for($i = 0; $i < count($s); $i++){
-            $id_reg = '@<li[^>]+class="g"[^>]?(?:id="([^"]*)")?[^>]*>@s';
+            $id_reg = '@<div[^>]+class="g"[^>]?(?:id="([^"]*)")?[^>]*>@s';
             preg_match($id_reg, $s[$i], $r);
             $id = isset($r[1]) ? $this->e ? encrypt($r[1], $this->k) : $r[1] : '';
             $href_reg = '@<h3[^>]+class="r">.*?<a[^>]+href="([^"]*)"[^>]*>(.*?)</a>@s';

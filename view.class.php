@@ -242,9 +242,9 @@ class view {
                     );
                 }
             }
+			//echo var_dump($this->g->results);
             if($this->g->status['errno']){
                 if($this->g->status['errno'] == 404){
-                    echo $this->head;
                     echo str_replace('<{key}>', $this->g->get_key(),
                         str_replace('<{fill1}>', $s ,$this->s_start)
                     );
